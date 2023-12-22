@@ -24,7 +24,7 @@ class TeamsState extends State<Teams> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: RegularAppBar(
-          title: 'Players',
+          title: 'Teams',
           prevContext: context,
         ),
         body: RefreshIndicator(
@@ -42,7 +42,7 @@ class TeamsState extends State<Teams> {
 
                   final team = data[index];
 
-                  return PlayerListTile(player: team);
+                  return TeamListTile(team: team);
                 },
               ); 
             },

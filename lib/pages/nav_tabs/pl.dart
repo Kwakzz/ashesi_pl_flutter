@@ -2,6 +2,7 @@ import 'package:ashesi_premier_league/helper/widgets/menu_widgets.dart';
 import 'package:ashesi_premier_league/pages/pl/fixtures.dart';
 import 'package:ashesi_premier_league/pages/pl/players.dart';
 import 'package:ashesi_premier_league/pages/pl/results.dart';
+import 'package:ashesi_premier_league/pages/pl/teams.dart';
 import 'package:flutter/material.dart';
 
 
@@ -40,8 +41,8 @@ class MoreState extends State<Pl> {
 
         NextFixture(
           onTap: (){}, 
-          team1LogoLink: "https://assets.stickpng.com/images/580b57fcd9996e24bc43c4e1.png",
-          team2LogoLink: "https://cdn.freebiesupply.com/images/large/2x/manchester-city-logo-png-transparent.png",
+          team1LogoLink: "https://res.cloudinary.com/dvghxq3ba/image/upload/v1703097680/Team%20Logos/elite_logo_pmbtg5.png",
+          team2LogoLink: "https://res.cloudinary.com/dvghxq3ba/image/upload/v1703097681/Team%20Logos/lu_logo_oailhh.png",
         ),
 
         const SizedBox(height: 20),
@@ -96,7 +97,14 @@ class MoreState extends State<Pl> {
         MenuListTile(
           title: "Teams", 
           iconData: Icons.group,
-          onTap: () {}
+          onTap: () {
+            Navigator.push(
+              context, 
+              MaterialPageRoute(
+                builder: (context) => const Teams()
+              )
+            );
+          }
         ),
 
         MenuListTile(

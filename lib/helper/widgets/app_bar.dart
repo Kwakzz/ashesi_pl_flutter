@@ -4,21 +4,26 @@ import 'package:google_fonts/google_fonts.dart';
 import 'text.dart';
 
 
+// ignore: must_be_immutable
 class RegularAppBar extends StatelessWidget implements PreferredSizeWidget {
   
   @override
   Size get preferredSize => const Size.fromHeight(60);
   final String title;
+  Color color;
 
   final BuildContext prevContext;
 
-  const RegularAppBar(
+  RegularAppBar(
     {
       super.key, 
       required this.prevContext,
       required this.title,
+      this.color = const Color.fromARGB(255, 197, 50, 50),
     }
   );
+
+  
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +44,7 @@ class RegularAppBar extends StatelessWidget implements PreferredSizeWidget {
         },
         iconSize: 15,
       ),
-      backgroundColor: const Color.fromARGB(255, 197, 50, 50),
+      backgroundColor: color
     );
   }
 }

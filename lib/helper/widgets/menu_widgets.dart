@@ -1,4 +1,5 @@
 // ignore_for_file: must_be_immutable
+import 'package:ashesi_premier_league/pages/pl/view_team.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -50,6 +51,62 @@ class MenuListTile extends StatelessWidget {
         trailing: const Icon(
           Icons.arrow_forward_ios,
           color: Colors.white,
+          size: 9,
+        ),
+        onTap: onTap,
+      )
+    );
+  }
+
+}
+
+/// This list tile is used in the ViewTeam page.
+class ViewTeamListTile extends StatelessWidget {
+
+  /// This list tile is used in the ViewTeam page.
+  ViewTeamListTile(
+    {
+      super.key, 
+      required this.title,
+      this.trailing,
+      required this.onTap,
+      required this.iconData,
+      required this.team
+    }
+  );
+
+  final String title;
+  Widget? trailing;
+  final void Function()? onTap;
+  final IconData iconData;
+  final Map<String,dynamic> team;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.only(right:10, left:10, top:5, bottom:5),
+      margin: const EdgeInsets.only(bottom: 10, left: 10, right: 10),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        color: Colors.white
+      ),
+      
+      child: ListTile(
+        title: Text(
+          title,
+          style: GoogleFonts.poppins(
+            fontSize: 12,
+            color: Color(int.parse('0xFF${team['color']}')),
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+        leading: Icon(
+          iconData,
+          color: Color(int.parse('0xFF${team['color']}')),
+        ),
+        trailing: Icon(
+          Icons.arrow_forward_ios,
+          color: Color(int.parse('0xFF${team['color']}')),
           size: 9,
         ),
         onTap: onTap,
@@ -129,77 +186,212 @@ class PlayerListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(1),
-      margin: const EdgeInsets.only(top: 5, bottom: 5, left: 20, right: 20),
-      decoration: const BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(10)),
-        border: Border(
-          bottom: BorderSide(
-            color: Colors.grey,
-            width: 0.2,
-            style: BorderStyle.solid
+    return Center(
+      child: Container(
+        padding: const EdgeInsets.all(1),
+        margin: const EdgeInsets.only(top: 5, bottom: 5, left: 20, right: 20),
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+          border: Border(
+            bottom: BorderSide(
+              color: Colors.grey,
+              width: 0.2,
+              style: BorderStyle.solid
+            )
           )
-        )
-      ),
-      
-      child: ListTile(
-        title: RichText(
-          text: TextSpan(
-            style: DefaultTextStyle.of(context).style,
-            children: <TextSpan>[
-              TextSpan(
-                text: player['first_name'] ?? "No first name",
-                style: GoogleFonts.poppins(
-                  fontSize: 14,
-                  color:Colors.black,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-              TextSpan(
-                text: " ",
-                style: GoogleFonts.poppins(
-                  fontSize: 15,
-                  color:Colors.black,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-              TextSpan(
-                text: player['last_name'].toString().toUpperCase(),
-                style: GoogleFonts.poppins(
-                  fontSize: 15,
-                  color:Colors.black,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ],
-        )
         ),
-        subtitle: Text(
-          player['team']['name'] ?? "No team",
-          style: GoogleFonts.poppins(
-            fontSize: 12,
-            color:  Color(int.parse('0xFF${player['team']['color']}')),
-            fontWeight: FontWeight.w400,
+        
+        child: ListTile(
+          title: RichText(
+            text: TextSpan(
+              style: DefaultTextStyle.of(context).style,
+              children: <TextSpan>[
+                TextSpan(
+                  text: player['first_name'] ?? "No first name",
+                  style: GoogleFonts.poppins(
+                    fontSize: 14,
+                    color:Colors.black,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+                TextSpan(
+                  text: " ",
+                  style: GoogleFonts.poppins(
+                    fontSize: 15,
+                    color:Colors.black,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+                TextSpan(
+                  text: player['last_name'].toString().toUpperCase(),
+                  style: GoogleFonts.poppins(
+                    fontSize: 15,
+                    color:Colors.black,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ],
+          )
           ),
-        ),
-        leading: ClipRect(
-          child: Image.network(
-            player['image'] ?? "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png",
-            width: 50,
-            height: 50,
-            errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
-              return const Icon(Icons.error, color: Colors.white,);
-            }
+          subtitle: Text(
+            player['team']['name'] ?? "No team",
+            style: GoogleFonts.poppins(
+              fontSize: 12,
+              color:  Colors.black87,
+              fontWeight: FontWeight.w400,
+            ),
           ),
-        ),
-        trailing: const Icon(
-          Icons.arrow_forward_ios,
-          color: Colors.black,
-          size: 10,
-        ),
-        onTap: (){},
+          leading: ClipRect(
+            child: Image.network(
+              player['image'] ?? "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png",
+              width: 50,
+              height: 50,
+              errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
+                return const Icon(Icons.error, color: Colors.white,);
+              }
+            ),
+          ),
+          trailing: const Icon(
+            Icons.arrow_forward_ios,
+            color: Colors.black,
+            size: 10,
+          ),
+          onTap: (){},
+        )
       )
+    );
+  }
+
+}
+
+
+/// This list tile is used to display the team's name and image in the Teams page.
+class TeamListTile extends StatelessWidget {
+
+  /// This list tile is used to display the team's name and image in the Teams page.
+  const TeamListTile(
+    {
+      super.key, 
+      required this.team
+    }
+  );
+
+  final Map<String,dynamic> team;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context, 
+          MaterialPageRoute(
+            builder: (context) => ViewTeam(team: team)
+          )
+        );
+      },
+      child: Container(
+        padding: const EdgeInsets.only(top: 15, bottom: 15),
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+          border: Border(
+            bottom: BorderSide(
+              color: Colors.grey,
+              width: 0.2,
+              style: BorderStyle.solid
+            )
+          )
+        ),
+        
+        child: Column(
+          children: [
+            Image.network(
+              team['logo_url'],
+              width: 50,
+              height: 50,
+              errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
+                return const Icon(Icons.error, color: Colors.white,);
+              }
+            ),
+
+            const SizedBox(height: 5,),
+
+            Text(
+              team['name'],
+              style: GoogleFonts.poppins(
+                fontSize: 12,
+                color:  Colors.black,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+          ],
+        )
+      )
+    );
+  }
+
+}
+
+
+/// This is rectangle is used on the ViewTeam page. It contains the club's name and logo.
+class TeamRectangle extends StatelessWidget {
+
+  /// This is rectangle is used on the ViewTeam page. It contains the club's name and logo.
+  // ignore: prefer_const_constructors_in_immutables
+  TeamRectangle(
+    {
+      super.key, 
+      required this.team
+    }
+  );
+
+  final Map<String,dynamic> team;
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Container(
+        height: 130,
+        width: MediaQuery.of(context).size.width,
+        padding: const EdgeInsets.only(left:30, right:30),
+        decoration:  BoxDecoration(
+          image: DecorationImage(
+            image:const AssetImage("assets/menu_rectangle.jpg"),
+            colorFilter: ColorFilter.mode(Color(int.parse('0xFF${team['color']}')).withOpacity(1), BlendMode.hue),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+
+          children: [
+            Expanded(
+              child: Text(
+                team['name'],
+                style: GoogleFonts.poppins(
+                  color: Colors.white,
+                  fontSize: 25,
+                  fontWeight: FontWeight.w900
+                )
+              ),
+            ),
+
+            ClipRect(
+              child: Container(
+                margin: const EdgeInsets.only(top: 10, bottom: 10),
+                child: Image.network(
+                  team['logo_url'],
+                  width: 120,
+                  height: 120,
+                  errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
+                    return const Icon(Icons.error, color: Colors.white,);
+                  }
+                ),
+              )
+            )
+          ],
+        ),
+      )
+  
     );
   }
 
@@ -278,6 +470,7 @@ class MenuRectangle extends StatelessWidget {
   }
 
 }
+
 
 
 /// This rectangle is used at the top of the APL tab page and displays the next APL fixture. 
