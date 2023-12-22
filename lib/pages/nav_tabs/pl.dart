@@ -1,4 +1,7 @@
 import 'package:ashesi_premier_league/helper/widgets/menu_widgets.dart';
+import 'package:ashesi_premier_league/pages/pl/fixtures.dart';
+import 'package:ashesi_premier_league/pages/pl/players.dart';
+import 'package:ashesi_premier_league/pages/pl/results.dart';
 import 'package:flutter/material.dart';
 
 
@@ -35,10 +38,10 @@ class MoreState extends State<Pl> {
     return ListView(
       children: [
 
-        FixtureRectangle(
+        NextFixture(
           onTap: (){}, 
-          team1ImageLink: "https://assets.stickpng.com/images/580b57fcd9996e24bc43c4e1.png",
-          team2ImageLink: "https://cdn.freebiesupply.com/images/large/2x/manchester-city-logo-png-transparent.png",
+          team1LogoLink: "https://assets.stickpng.com/images/580b57fcd9996e24bc43c4e1.png",
+          team2LogoLink: "https://cdn.freebiesupply.com/images/large/2x/manchester-city-logo-png-transparent.png",
         ),
 
         const SizedBox(height: 20),
@@ -46,13 +49,27 @@ class MoreState extends State<Pl> {
         MenuListTile(
           title: "Fixtures", 
           iconData: Icons.sports_soccer,
-          onTap: () {}
+          onTap: () {
+            Navigator.push(
+              context, 
+              MaterialPageRoute(
+                builder: (context) => const Fixtures()
+              )
+            );
+          }
         ),
 
         MenuListTile(
           title: "Results", 
           iconData: Icons.insert_chart,
-          onTap: () {}
+          onTap: () {
+            Navigator.push(
+              context, 
+              MaterialPageRoute(
+                builder: (context) => const Results()
+              )
+            );
+          }
         ),
 
         MenuListTile(
@@ -66,7 +83,14 @@ class MoreState extends State<Pl> {
         MenuListTile(
           title: "Players", 
           iconData: Icons.run_circle,
-          onTap: () {}
+          onTap: () {
+            Navigator.push(
+              context, 
+              MaterialPageRoute(
+                builder: (context) => const Players()
+              )
+            );
+          }
         ),
 
         MenuListTile(

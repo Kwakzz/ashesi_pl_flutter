@@ -114,6 +114,100 @@ class MoreListTile extends StatelessWidget {
 }
 
 
+/// This list tile is used to display a player's name, team and image in the Players page.
+class PlayerListTile extends StatelessWidget {
+
+  /// This list tile is used to display a player's name, team and image in the Players page.
+  const PlayerListTile(
+    {
+      super.key, 
+      required this.player
+    }
+  );
+
+  final Map<String,dynamic> player;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(1),
+      margin: const EdgeInsets.only(top: 5, bottom: 5, left: 20, right: 20),
+      decoration: const BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(10)),
+        border: Border(
+          bottom: BorderSide(
+            color: Colors.grey,
+            width: 0.2,
+            style: BorderStyle.solid
+          )
+        )
+      ),
+      
+      child: ListTile(
+        title: RichText(
+          text: TextSpan(
+            style: DefaultTextStyle.of(context).style,
+            children: <TextSpan>[
+              TextSpan(
+                text: player['first_name'] ?? "No first name",
+                style: GoogleFonts.poppins(
+                  fontSize: 14,
+                  color:Colors.black,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+              TextSpan(
+                text: " ",
+                style: GoogleFonts.poppins(
+                  fontSize: 15,
+                  color:Colors.black,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+              TextSpan(
+                text: player['last_name'].toString().toUpperCase(),
+                style: GoogleFonts.poppins(
+                  fontSize: 15,
+                  color:Colors.black,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ],
+        )
+        ),
+        subtitle: Text(
+          player['team']['name'] ?? "No team",
+          style: GoogleFonts.poppins(
+            fontSize: 12,
+            color:  Color(int.parse('0xFF${player['team']['color']}')),
+            fontWeight: FontWeight.w400,
+          ),
+        ),
+        leading: ClipRect(
+          child: Image.network(
+            player['image'] ?? "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png",
+            width: 50,
+            height: 50,
+            errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
+              return const Icon(Icons.error, color: Colors.white,);
+            }
+          ),
+        ),
+        trailing: const Icon(
+          Icons.arrow_forward_ios,
+          color: Colors.black,
+          size: 10,
+        ),
+        onTap: (){},
+      )
+    );
+  }
+
+}
+
+
+
+
 /// This is a special navigation button. It contains text and the image of a player on a patterned background. 
 class MenuRectangle extends StatelessWidget {
 
@@ -187,21 +281,21 @@ class MenuRectangle extends StatelessWidget {
 
 
 /// This rectangle is used at the top of the APL tab page and displays the next APL fixture. 
-class FixtureRectangle extends StatelessWidget {
+class NextFixture extends StatelessWidget {
 
   /// This rectangle is used at the top of the APL tab page and displays the next APL fixture.
-  const FixtureRectangle(
+  const NextFixture(
     {
       super.key, 
       required this.onTap,
-      required this.team1ImageLink,
-      required this.team2ImageLink,
+      required this.team1LogoLink,
+      required this.team2LogoLink,
     }
   );
 
   final void Function()? onTap;
-  final String team1ImageLink;
-  final String team2ImageLink;
+  final String team1LogoLink;
+  final String team2LogoLink;
 
   @override
   Widget build(BuildContext context) {
@@ -226,7 +320,7 @@ class FixtureRectangle extends StatelessWidget {
 
               ClipRect(
                 child: Image.network(
-                  team1ImageLink,
+                  team1LogoLink,
                   width: MediaQuery.of(context).size.width*0.2,
                   height: 150,
                   errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
@@ -260,7 +354,7 @@ class FixtureRectangle extends StatelessWidget {
 
               ClipRect(
                 child: Image.network(
-                  team2ImageLink,
+                  team2LogoLink,
                   width: MediaQuery.of(context).size.width*0.2,
                   height: 150,
                   errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
@@ -277,6 +371,273 @@ class FixtureRectangle extends StatelessWidget {
   }
 
 }
+
+
+/// This is used to display fixtures in the Fixtures page.
+class Fixture extends StatelessWidget{
+
+  /// This is used to display fixtures in the Fixtures page.
+  const Fixture(
+    {
+      super.key,
+      required this.team1LogoLink,
+      required this.team1Name,
+      required this.team2LogoLink,
+      required this.team2Name,
+    }
+  );
+
+  final String team1LogoLink;
+  final String team2LogoLink;
+  final String team1Name;
+  final String team2Name;
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        children:[
+
+          Text(
+            "Premier League",
+            style: GoogleFonts.poppins(
+              color: Colors.black87,
+              fontSize: 13,
+              fontWeight: FontWeight.w500
+            )
+          ),
+
+          Container(
+            decoration: const BoxDecoration(
+              border: Border(
+                bottom: BorderSide(
+                  color: Colors.grey,
+                  width: 0.2,
+                  style: BorderStyle.solid
+                )
+              )
+            ),
+            height: 100,
+            child: Row (
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ClipRect(
+                  child: Image.network(
+                    team1LogoLink,
+                    width: MediaQuery.of(context).size.width*0.2,
+                    height: 50,
+                    errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
+                      return const Icon(Icons.error, color: Colors.white,);
+                    }
+                  ),
+                ),
+
+                Text(
+                  team1Name,
+                  style: GoogleFonts.poppins(
+                    color: Colors.black,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w500
+                  ),
+                ),
+
+                Container(
+                  padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
+                  decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.all(Radius.circular(10)),
+                    border: Border.all(
+                      color: Colors.grey,
+                      width: 0.2,
+                      style: BorderStyle.solid
+                    )
+                  ),
+                  child: Text(
+                    "18:00",
+                    style: GoogleFonts.poppins(
+                      color: const Color.fromARGB(255, 197, 50, 50),
+                      fontSize: 15,
+                      fontWeight: FontWeight.w600
+                    )
+                  ),
+                  
+                ),
+
+                Text(
+                  team2Name,
+                  style: GoogleFonts.poppins(
+                    color: Colors.black,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w500
+                  ),
+                ),
+                
+
+                ClipRect(
+                  child: Image.network(
+                    team2LogoLink,
+                    width: MediaQuery.of(context).size.width*0.2,
+                    height: 50,
+                    errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
+                      return const Icon(Icons.error, color: Colors.white,);
+                    }
+                  ),
+                )
+              ],
+            )
+          )
+        ]
+      )
+
+    );
+  }
+
+}
+
+
+/// This is used to display results in the Results page.
+class Result extends StatelessWidget{
+
+  /// This is used to display results in the Results page.
+  const Result(
+    {
+      super.key,
+      required this.team1LogoLink,
+      required this.team1Name,
+      required this.team2LogoLink,
+      required this.team2Name,
+    }
+  );
+
+  final String team1LogoLink;
+  final String team2LogoLink;
+  final String team1Name;
+  final String team2Name;
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        children:[
+
+          Text(
+            "Premier League",
+            style: GoogleFonts.poppins(
+              color: Colors.black87,
+              fontSize: 13,
+              fontWeight: FontWeight.w500
+            )
+          ),
+
+
+          Container(
+            decoration: const BoxDecoration(
+              border: Border(
+                bottom: BorderSide(
+                  color: Colors.grey,
+                  width: 0.2,
+                  style: BorderStyle.solid
+                )
+              )
+            ),
+            height: 100,
+            child: Row (
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ClipRect(
+                  child: Image.network(
+                    team1LogoLink,
+                    width: MediaQuery.of(context).size.width*0.2,
+                    height: 50,
+                    errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
+                      return const Icon(Icons.error, color: Colors.white,);
+                    }
+                  ),
+                ),
+
+                Text(
+                  team1Name,
+                  style: GoogleFonts.poppins(
+                    color: Colors.black,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w500
+                  ),
+                ),
+
+                Container(
+                  padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
+                  decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.all(Radius.circular(10)),
+                    border: Border.all(
+                      color: Colors.grey,
+                      width: 0.2,
+                      style: BorderStyle.solid,
+                    ),
+                  ),
+                  child: RichText(
+                    text: TextSpan(
+                      style: DefaultTextStyle.of(context).style,
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: '2',
+                          style: GoogleFonts.poppins(
+                            color: const Color.fromARGB(255, 197, 50, 50),
+                            fontSize: 20, // Set the font size for '2'
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        TextSpan(
+                          text: '   FT   ',
+                          style: GoogleFonts.poppins(
+                            color: const Color.fromARGB(255, 197, 50, 50),
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        TextSpan(
+                          text: '1',
+                          style: GoogleFonts.poppins(
+                            color: const Color.fromARGB(255, 197, 50, 50),
+                            fontSize: 20, // Set the font size for '1'
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+
+
+                Text(
+                  team2Name,
+                  style: GoogleFonts.poppins(
+                    color: Colors.black,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w500
+                  ),
+                ),
+                
+
+                ClipRect(
+                  child: Image.network(
+                    team2LogoLink,
+                    width: MediaQuery.of(context).size.width*0.2,
+                    height: 50,
+                    errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
+                      return const Icon(Icons.error, color: Colors.white,);
+                    }
+                  ),
+                )
+              ],
+            )
+          )
+        ]
+      )
+
+    );
+  }
+
+}
+
 
 /// This rectangle contains a has a background image, and the following words:
 /// JOIN THE APL. Get the latest updates on the best university football league in Ghana.

@@ -14,7 +14,7 @@ Future<Map<String,dynamic>> getNewsItems () async {
 }
 
 
-/// This function sends a GET request to the server to get a news item.
+/// This function sends a GET request to the server to get a news item by id.
 Future<Map<String,dynamic>> getNewsItem (String id) async {
   
     return fetchMap(

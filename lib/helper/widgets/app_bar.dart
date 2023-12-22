@@ -25,12 +25,13 @@ class RegularAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       title: HeaderText(
         text: title,
+        color: Colors.white,
       ),
       elevation: 0,
       leading: IconButton(
         icon: const Icon(
           Icons.arrow_back_ios,
-          color: Colors.black,
+          color: Colors.white,
           size: 15,
         ),
         onPressed: () {
@@ -38,7 +39,7 @@ class RegularAppBar extends StatelessWidget implements PreferredSizeWidget {
         },
         iconSize: 15,
       ),
-      backgroundColor: Colors.white,
+      backgroundColor: const Color.fromARGB(255, 197, 50, 50),
     );
   }
 }
