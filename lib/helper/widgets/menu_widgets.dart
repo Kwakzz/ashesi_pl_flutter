@@ -1,4 +1,5 @@
 // ignore_for_file: must_be_immutable
+import 'package:ashesi_premier_league/pages/pl/view_player.dart';
 import 'package:ashesi_premier_league/pages/pl/view_team.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -256,7 +257,14 @@ class PlayerListTile extends StatelessWidget {
             color: Colors.black,
             size: 10,
           ),
-          onTap: (){},
+          onTap: (){
+            Navigator.push(
+              context, 
+              MaterialPageRoute(
+                builder: (context) => ViewPlayer(player: player)
+              )
+            );
+          },
         )
       )
     );
@@ -326,6 +334,133 @@ class TeamListTile extends StatelessWidget {
           ],
         )
       )
+    );
+  }
+
+}
+
+
+/// This list tile is used to display player details like name, age.
+class PlayerDetailsTile extends StatelessWidget {
+
+  /// This list tile is used to display player details like name, age.
+  const PlayerDetailsTile(
+    {
+      super.key, 
+      required this.playerDetail,
+      required this.title,
+      required this.team
+    }
+  );
+
+  final String playerDetail;
+  final String title;
+  final Map<String,dynamic> team;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.only(left: 5, right: 5),
+      color: Colors.white,
+      child: ListTile(
+        title: Text(
+          title.toString().toUpperCase(),
+          style: GoogleFonts.poppins(
+            fontSize: 12,
+            color:  Color(int.parse('0xFF${team['color']}')),
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+        trailing: Text(
+          playerDetail,
+          style: GoogleFonts.poppins(
+            fontSize: 12,
+            color:  Color(int.parse('0xFF${team['color']}')),
+            fontWeight: FontWeight.w400,
+          ),
+        ),
+      )
+    );
+  }
+
+}
+
+
+/// This is rectangle is used on the ViewPlayer page. It contains the player's name and image.
+class PlayerRectangle extends StatelessWidget {
+
+  /// This is rectangle is used on the ViewPlayer page. It contains the player's name and image.
+  // ignore: prefer_const_constructors_in_immutables
+  PlayerRectangle(
+    {
+      super.key, 
+      required this.player
+    }
+  );
+
+  final Map<String,dynamic> player;
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Container(
+        height: 130,
+        width: MediaQuery.of(context).size.width,
+        padding: const EdgeInsets.only(right:30),
+        decoration:  BoxDecoration(
+          image: DecorationImage(
+            image:const AssetImage("assets/menu_rectangle.jpg"),
+            colorFilter: ColorFilter.mode(Color(int.parse('0xFF${player['team']['color']}')).withOpacity(1), BlendMode.hue),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+
+          children: [
+
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    player['first_name'],
+                    style: GoogleFonts.poppins(
+                      color: Colors.white,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+
+                  Text(
+                    player['last_name'],
+                    style: GoogleFonts.poppins(
+                      color: Colors.white,
+                      fontSize: 15,
+                      fontWeight: FontWeight.w900
+                    )
+                  ),
+                ],
+              )
+            ),
+
+            ClipRect(
+              child: Container(
+                margin: const EdgeInsets.only(top: 10),
+                child: Image.network(
+                  player['image'] ?? "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png",
+                  width: 100,
+                  height: 100,
+                  errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
+                    return const Icon(Icons.error, color: Colors.white,);
+                  }
+                ),
+              )
+            )
+          ],
+        ),
+      )
+  
     );
   }
 
