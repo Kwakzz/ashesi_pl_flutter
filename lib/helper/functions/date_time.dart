@@ -33,13 +33,13 @@ String parseTime (String dateTimeString) {
 
 /// This function parses a dateTime string into a DateTime object and returns the date in words. For example, if the dateTimeString is "2023-12-02T00:56:51.997885Z", the function returns "2 December".
 String formatDateIntoWords(String dateTimeString) {
-
   DateTime dateTime = DateTime.parse(dateTimeString);
-  String day = dateTime.day.toString();
-  String month = DateFormat.MMMM().format(dateTime);
 
+  String day = DateFormat.d().format(dateTime); // Day of the month
+  String month = DateFormat.MMMM().format(dateTime); // Month
+  String weekday = DateFormat.EEEE().format(dateTime); // Full day of the week
 
-  return "$day $month";
+  return "${weekday.substring(0, 3)} $day ${month.substring(0, 3)}" ;
 }
 
 

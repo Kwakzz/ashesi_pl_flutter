@@ -351,7 +351,7 @@ class AppDropDownButton extends StatelessWidget {
           onChanged: onChanged,
           decoration: InputDecoration(
             hintText: hintText,
-            hintStyle: GoogleFonts.montserrat(
+            hintStyle: GoogleFonts.poppins(
               fontSize: 12,
               color: Colors.grey,
             ),

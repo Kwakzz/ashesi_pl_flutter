@@ -708,26 +708,23 @@ class Fixture extends StatelessWidget{
   const Fixture(
     {
       super.key,
-      required this.team1LogoLink,
-      required this.team1Name,
-      required this.team2LogoLink,
-      required this.team2Name,
+      required this.fixture
     }
   );
 
-  final String team1LogoLink;
-  final String team2LogoLink;
-  final String team1Name;
-  final String team2Name;
+  final Map<String,dynamic> fixture;
 
   @override
   Widget build(BuildContext context) {
     return Center(
+
       child: Column(
         children:[
 
+          const SizedBox(height: 15),
+
           Text(
-            "Premier League",
+            "${fixture['competition']['name']} (${fixture['competition']['gender']})",
             style: GoogleFonts.poppins(
               color: Colors.black87,
               fontSize: 13,
@@ -745,13 +742,14 @@ class Fixture extends StatelessWidget{
                 )
               )
             ),
-            height: 100,
+            height: 70,
+
             child: Row (
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 ClipRect(
                   child: Image.network(
-                    team1LogoLink,
+                    fixture['home_team']['logo_url'],
                     width: MediaQuery.of(context).size.width*0.2,
                     height: 50,
                     errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
@@ -761,7 +759,7 @@ class Fixture extends StatelessWidget{
                 ),
 
                 Text(
-                  team1Name,
+                  fixture['home_team']['name_abbreviation'],
                   style: GoogleFonts.poppins(
                     color: Colors.black,
                     fontSize: 12,
@@ -780,7 +778,7 @@ class Fixture extends StatelessWidget{
                     )
                   ),
                   child: Text(
-                    "18:00",
+                    fixture['match_time'].substring(0, 5),
                     style: GoogleFonts.poppins(
                       color: const Color.fromARGB(255, 197, 50, 50),
                       fontSize: 15,
@@ -791,7 +789,7 @@ class Fixture extends StatelessWidget{
                 ),
 
                 Text(
-                  team2Name,
+                  fixture['away_team']['name_abbreviation'],
                   style: GoogleFonts.poppins(
                     color: Colors.black,
                     fontSize: 12,
@@ -802,7 +800,7 @@ class Fixture extends StatelessWidget{
 
                 ClipRect(
                   child: Image.network(
-                    team2LogoLink,
+                    fixture['away_team']['logo_url'],
                     width: MediaQuery.of(context).size.width*0.2,
                     height: 50,
                     errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
@@ -812,8 +810,12 @@ class Fixture extends StatelessWidget{
                 )
               ],
             )
-          )
+          ),
+
         ]
+
+      
+
       )
 
     );
@@ -829,17 +831,12 @@ class Result extends StatelessWidget{
   const Result(
     {
       super.key,
-      required this.team1LogoLink,
-      required this.team1Name,
-      required this.team2LogoLink,
-      required this.team2Name,
+      required this.result
     }
   );
 
-  final String team1LogoLink;
-  final String team2LogoLink;
-  final String team1Name;
-  final String team2Name;
+
+  final Map<String,dynamic> result;
 
   @override
   Widget build(BuildContext context) {
@@ -847,8 +844,10 @@ class Result extends StatelessWidget{
       child: Column(
         children:[
 
+          const SizedBox(height: 15),
+
           Text(
-            "Premier League",
+            "${result['competition']['name']} (${result['competition']['gender']})",
             style: GoogleFonts.poppins(
               color: Colors.black87,
               fontSize: 13,
@@ -873,7 +872,7 @@ class Result extends StatelessWidget{
               children: [
                 ClipRect(
                   child: Image.network(
-                    team1LogoLink,
+                    result['home_team']['logo_url'],
                     width: MediaQuery.of(context).size.width*0.2,
                     height: 50,
                     errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
@@ -883,7 +882,7 @@ class Result extends StatelessWidget{
                 ),
 
                 Text(
-                  team1Name,
+                  result['home_team']['name_abbreviation'],
                   style: GoogleFonts.poppins(
                     color: Colors.black,
                     fontSize: 12,
@@ -906,7 +905,7 @@ class Result extends StatelessWidget{
                       style: DefaultTextStyle.of(context).style,
                       children: <TextSpan>[
                         TextSpan(
-                          text: '2',
+                          text: result['home_team_score'].toString(),
                           style: GoogleFonts.poppins(
                             color: const Color.fromARGB(255, 197, 50, 50),
                             fontSize: 20, // Set the font size for '2'
@@ -922,7 +921,7 @@ class Result extends StatelessWidget{
                           ),
                         ),
                         TextSpan(
-                          text: '1',
+                          text: result['away_team_score'].toString(),
                           style: GoogleFonts.poppins(
                             color: const Color.fromARGB(255, 197, 50, 50),
                             fontSize: 20, // Set the font size for '1'
@@ -936,7 +935,7 @@ class Result extends StatelessWidget{
 
 
                 Text(
-                  team2Name,
+                  result['away_team']['name_abbreviation'],
                   style: GoogleFonts.poppins(
                     color: Colors.black,
                     fontSize: 12,
@@ -947,7 +946,7 @@ class Result extends StatelessWidget{
 
                 ClipRect(
                   child: Image.network(
-                    team2LogoLink,
+                    result['away_team']['logo_url'],
                     width: MediaQuery.of(context).size.width*0.2,
                     height: 50,
                     errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {

@@ -11,12 +11,14 @@ class HeaderText extends StatelessWidget {
     super.key,
     required this.text,
     this.color = Colors.black,
-    this.fontSize = 15
+    this.fontSize = 15,
+    this.fontWeight = FontWeight.w600,
   });
 
   final String text;
   final Color color;
   final double fontSize;
+  final FontWeight fontWeight;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +27,7 @@ class HeaderText extends StatelessWidget {
       style: GoogleFonts.poppins(
         fontSize: fontSize,
         color: color,
-        fontWeight: FontWeight.w600,
+        fontWeight: fontWeight,
       ),
     );
   }
