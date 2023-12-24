@@ -96,7 +96,7 @@ class ViewPlayerState extends State<ViewPlayer> {
               const SizedBox(height: 10),
 
               PlayerDetailsTile(
-                playerDetail: 0.toString(),
+                playerDetail: widget.player['no_of_goals_in_history'].toString(),
                 title: "Goals", 
                 team: widget.player['team'],
               ),

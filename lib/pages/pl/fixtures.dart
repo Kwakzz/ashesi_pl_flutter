@@ -74,7 +74,7 @@ class FixturesState extends State<Fixtures> {
               );
 
             },
-            couldNotLoadText: "fixtures",
+            errorText: "fixtures",
             reloadPageFunction: () {
               setState(() {
                 _getFixtures();

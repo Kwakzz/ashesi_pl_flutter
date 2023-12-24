@@ -21,7 +21,7 @@ class JoinUsButton extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.white,
           padding: const EdgeInsets.symmetric(
-            horizontal: 70,
+            horizontal: 40,
             vertical: 15,
           ),
           shape: RoundedRectangleBorder(
@@ -31,7 +31,7 @@ class JoinUsButton extends StatelessWidget {
         child: Text(
           "Register/Sign In",
           style: GoogleFonts.poppins(
-            fontSize: 15,
+            fontSize: 14,
             fontWeight: FontWeight.w600,
             color: const Color.fromARGB(255, 197, 50, 50),
           ),

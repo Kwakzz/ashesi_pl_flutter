@@ -1,5 +1,6 @@
 import 'package:ashesi_premier_league/helper/widgets/menu_widgets.dart';
 import 'package:ashesi_premier_league/pages/pl/fixtures.dart';
+import 'package:ashesi_premier_league/pages/pl/news.dart';
 import 'package:ashesi_premier_league/pages/pl/players.dart';
 import 'package:ashesi_premier_league/pages/pl/results.dart';
 import 'package:ashesi_premier_league/pages/pl/teams.dart';
@@ -118,7 +119,14 @@ class MoreState extends State<Pl> {
         MenuListTile(
           title: "News", 
           iconData: Icons.newspaper,
-          onTap: () {}
+          onTap: () {
+            Navigator.push(
+              context, 
+              MaterialPageRoute(
+                builder: (context) => const News()
+              )
+            );
+          }
         ),
 
         MenuListTile(

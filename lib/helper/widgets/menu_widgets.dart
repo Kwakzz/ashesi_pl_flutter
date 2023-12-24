@@ -1,4 +1,5 @@
 // ignore_for_file: must_be_immutable
+import 'package:ashesi_premier_league/helper/functions/date_time.dart';
 import 'package:ashesi_premier_league/pages/pl/view_player.dart';
 import 'package:ashesi_premier_league/pages/pl/view_team.dart';
 import 'package:flutter/material.dart';
@@ -29,8 +30,8 @@ class MenuListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(right:10, left:10, top:5, bottom:5),
-      margin: const EdgeInsets.only(bottom: 10, left: 10, right: 10),
+      padding: const EdgeInsets.only(right:10, left:10, top:2.5, bottom:2.5),
+      margin: const EdgeInsets.only(bottom: 5, left: 10, right: 10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         color: const Color.fromARGB(255, 197, 50, 50),
@@ -42,7 +43,7 @@ class MenuListTile extends StatelessWidget {
           style: GoogleFonts.poppins(
             fontSize: 12,
             color: Colors.white,
-            fontWeight: FontWeight.w500,
+            fontWeight: FontWeight.w400,
           ),
         ),
         leading: Icon(
@@ -85,8 +86,8 @@ class ViewTeamListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(right:10, left:10, top:5, bottom:5),
-      margin: const EdgeInsets.only(bottom: 10, left: 10, right: 10),
+      padding: const EdgeInsets.only(right:10, left:10, top:2.5, bottom:2.5),
+      margin: const EdgeInsets.only(bottom: 5, left: 10, right: 10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         color: Colors.white
@@ -98,7 +99,7 @@ class ViewTeamListTile extends StatelessWidget {
           style: GoogleFonts.poppins(
             fontSize: 12,
             color: Color(int.parse('0xFF${team['color']}')),
-            fontWeight: FontWeight.w500,
+            fontWeight: FontWeight.w400,
           ),
         ),
         leading: Icon(
@@ -138,13 +139,13 @@ class MoreListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(10),
-      margin: const EdgeInsets.only(bottom: 10, left: 30, right: 30),
+      padding: const EdgeInsets.all(5),
+      margin: const EdgeInsets.only(bottom: 5, left: 30, right: 30),
       decoration: const BoxDecoration(
         border: Border(
           bottom: BorderSide(
             color: Colors.white,
-            width: 1.5,
+            width: 1,
             style: BorderStyle.solid
           )
         )
@@ -154,15 +155,15 @@ class MoreListTile extends StatelessWidget {
         title: Text(
           title,
           style: GoogleFonts.poppins(
-            fontSize: 13,
+            fontSize: 12,
             color: Colors.white,
-            fontWeight: FontWeight.w700,
+            fontWeight: FontWeight.w500,
           ),
         ),
         trailing: const Icon(
           Icons.arrow_forward_ios,
           color: Colors.white,
-          size: 10,
+          size: 9,
         ),
         onTap: onTap,
       )
@@ -190,7 +191,7 @@ class PlayerListTile extends StatelessWidget {
     return Center(
       child: Container(
         padding: const EdgeInsets.all(1),
-        margin: const EdgeInsets.only(top: 5, bottom: 5, left: 20, right: 20),
+        margin: const EdgeInsets.only(top: 2.5, bottom: 2.5, left: 10, right: 10),
         decoration: const BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(10)),
           border: Border(
@@ -210,23 +211,18 @@ class PlayerListTile extends StatelessWidget {
                 TextSpan(
                   text: player['first_name'] ?? "No first name",
                   style: GoogleFonts.poppins(
-                    fontSize: 14,
+                    fontSize: 12,
                     color:Colors.black,
                     fontWeight: FontWeight.w400,
                   ),
                 ),
-                TextSpan(
-                  text: " ",
-                  style: GoogleFonts.poppins(
-                    fontSize: 15,
-                    color:Colors.black,
-                    fontWeight: FontWeight.w700,
-                  ),
+                const TextSpan(
+                  text: " ",        
                 ),
                 TextSpan(
                   text: player['last_name'].toString().toUpperCase(),
                   style: GoogleFonts.poppins(
-                    fontSize: 15,
+                    fontSize: 13,
                     color:Colors.black,
                     fontWeight: FontWeight.w500,
                   ),
@@ -255,7 +251,7 @@ class PlayerListTile extends StatelessWidget {
           trailing: const Icon(
             Icons.arrow_forward_ios,
             color: Colors.black,
-            size: 10,
+            size: 9,
           ),
           onTap: (){
             Navigator.push(
@@ -300,7 +296,6 @@ class TeamListTile extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.only(top: 15, bottom: 15),
         decoration: const BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(10)),
           border: Border(
             bottom: BorderSide(
               color: Colors.grey,
@@ -370,7 +365,7 @@ class PlayerDetailsTile extends StatelessWidget {
             color:  Color(int.parse('0xFF${team['color']}')),
             fontWeight: FontWeight.w500,
           ),
-        ),
+        ),          
         trailing: Text(
           playerDetail,
           style: GoogleFonts.poppins(
@@ -560,8 +555,7 @@ class MenuRectangle extends StatelessWidget {
       onTap: onTap,
       child: Center(
         child: Container(
-          height: 150,
-          width: MediaQuery.of(context).size.width,
+          height: 130,
           margin: const EdgeInsets.all(10),
           padding: const EdgeInsets.only(left:30, right:30),
           decoration: const BoxDecoration(
@@ -578,7 +572,7 @@ class MenuRectangle extends StatelessWidget {
                   title,
                   style: GoogleFonts.poppins(
                     color: Colors.white,
-                    fontSize: 35,
+                    fontSize: 25,
                     fontWeight: FontWeight.w900
                   )
                 ),
@@ -589,8 +583,8 @@ class MenuRectangle extends StatelessWidget {
                   margin: const EdgeInsets.only(top: 20),
                   child: Image.network(
                     playerImageLink,
-                    width: 150,
-                    height: 150,
+                    width: 130,
+                    height: 130,
                     errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
                       return const Icon(Icons.error, color: Colors.white,);
                     }
@@ -650,7 +644,7 @@ class NextFixture extends StatelessWidget {
                 child: Image.network(
                   team1LogoLink,
                   width: MediaQuery.of(context).size.width*0.2,
-                  height: 150,
+                  height: 120,
                   errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
                     return const Icon(Icons.error, color: Colors.white,);
                   }
@@ -664,7 +658,7 @@ class NextFixture extends StatelessWidget {
                     "VS",
                     style: GoogleFonts.poppins(
                       color: Colors.white,
-                      fontSize: 35,
+                      fontSize: 25,
                       fontWeight: FontWeight.w900
                     )
                   ),
@@ -672,8 +666,8 @@ class NextFixture extends StatelessWidget {
                     "Today",
                     style: GoogleFonts.poppins(
                       color: Colors.white,
-                      fontSize: 15,
-                      fontWeight: FontWeight.w700
+                      fontSize: 13,
+                      fontWeight: FontWeight.w600
                     )
                   ),
                 ],
@@ -684,7 +678,7 @@ class NextFixture extends StatelessWidget {
                 child: Image.network(
                   team2LogoLink,
                   width: MediaQuery.of(context).size.width*0.2,
-                  height: 150,
+                  height: 120,
                   errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
                     return const Icon(Icons.error, color: Colors.white,);
                   }
@@ -751,7 +745,7 @@ class Fixture extends StatelessWidget{
                   child: Image.network(
                     fixture['home_team']['logo_url'],
                     width: MediaQuery.of(context).size.width*0.2,
-                    height: 50,
+                    height: 40,
                     errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
                       return const Icon(Icons.error, color: Colors.white,);
                     }
@@ -781,7 +775,7 @@ class Fixture extends StatelessWidget{
                     fixture['match_time'].substring(0, 5),
                     style: GoogleFonts.poppins(
                       color: const Color.fromARGB(255, 197, 50, 50),
-                      fontSize: 15,
+                      fontSize: 14,
                       fontWeight: FontWeight.w600
                     )
                   ),
@@ -802,7 +796,7 @@ class Fixture extends StatelessWidget{
                   child: Image.network(
                     fixture['away_team']['logo_url'],
                     width: MediaQuery.of(context).size.width*0.2,
-                    height: 50,
+                    height: 40,
                     errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
                       return const Icon(Icons.error, color: Colors.white,);
                     }
@@ -874,7 +868,7 @@ class Result extends StatelessWidget{
                   child: Image.network(
                     result['home_team']['logo_url'],
                     width: MediaQuery.of(context).size.width*0.2,
-                    height: 50,
+                    height: 40,
                     errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
                       return const Icon(Icons.error, color: Colors.white,);
                     }
@@ -908,7 +902,7 @@ class Result extends StatelessWidget{
                           text: result['home_team_score'].toString(),
                           style: GoogleFonts.poppins(
                             color: const Color.fromARGB(255, 197, 50, 50),
-                            fontSize: 20, // Set the font size for '2'
+                            fontSize: 15, // Set the font size for '2'
                             fontWeight: FontWeight.w600,
                           ),
                         ),
@@ -916,7 +910,7 @@ class Result extends StatelessWidget{
                           text: '   FT   ',
                           style: GoogleFonts.poppins(
                             color: const Color.fromARGB(255, 197, 50, 50),
-                            fontSize: 14,
+                            fontSize: 11,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
@@ -924,7 +918,7 @@ class Result extends StatelessWidget{
                           text: result['away_team_score'].toString(),
                           style: GoogleFonts.poppins(
                             color: const Color.fromARGB(255, 197, 50, 50),
-                            fontSize: 20, // Set the font size for '1'
+                            fontSize: 15, // Set the font size for '1'
                             fontWeight: FontWeight.w600,
                           ),
                         ),
@@ -948,7 +942,7 @@ class Result extends StatelessWidget{
                   child: Image.network(
                     result['away_team']['logo_url'],
                     width: MediaQuery.of(context).size.width*0.2,
-                    height: 50,
+                    height: 40,
                     errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
                       return const Icon(Icons.error, color: Colors.white,);
                     }
@@ -1036,13 +1030,160 @@ class JoinTheAPLRectangle extends StatelessWidget {
 
 }
 
+/// This widget is used to customize the feature news item in the News page.
+/// It contains the news title, image, and tag.
+class FeatureNewsItem extends StatelessWidget{
+
+  const FeatureNewsItem(
+    {
+      super.key,
+      required this.news
+    }
+  );
+
+  final Map<String,dynamic> news;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: (){},
+      child: Container(
+        height: 300,
+        margin: const EdgeInsets.only(bottom: 10),
+        decoration: const BoxDecoration(
+          color: Colors.white
+        ),
+        child: Column(
+          children: [
+            Image.network(
+              news['featured_image'],
+              width: MediaQuery.of(context).size.width,
+              height: 200,
+              fit: BoxFit.cover,
+              errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
+                return const Icon(Icons.error, color: Colors.white,);
+              }
+            ),
+
+            Container(
+              padding: const EdgeInsets.all(10),
+              child: Column(
+                children: [
+                  Text(
+                    news['title'],
+                    style: GoogleFonts.poppins(
+                      color: Colors.black,
+                      fontSize: 15,
+                      fontWeight: FontWeight.w700
+                    ),
+                  ),
+
+                  const SizedBox(height: 10,),
+
+                  Text(
+                    news['tag']['name'],
+                    style: GoogleFonts.poppins(
+                      color: const Color.fromARGB(255, 197, 50, 50),
+                      fontSize: 12,
+                      fontWeight: FontWeight.w500
+                    ),
+                  ),
+                ],
+              ),
+            )
+          ],
+        )
+      )
+      
+    );
+  }
+
+}
+
+class NewsListTile extends StatelessWidget{
+
+  const NewsListTile(
+    {
+      super.key,
+      required this.news
+    }
+  );
+
+  final Map<String,dynamic> news;
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child:GestureDetector(
+        onTap: (){},
+        child: Container(
+          height: 110,
+          margin: const EdgeInsets.only(bottom: 10),
+          decoration: const BoxDecoration(
+            color: Colors.white
+          ),
+          child: Row(
+            children: [
+              Image.network(
+                news['featured_image'],
+                width: 100,
+                height:110,
+                fit: BoxFit.cover,
+                errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
+                  return const Icon(Icons.error, color: Colors.white,);
+                }
+              ),
+              
+
+              Expanded(
+                child: Container(
+                  padding: const EdgeInsets.all(10),
+                  child: Column(
+                    children: [
+                      Text(
+                        news['title'],
+                        style: GoogleFonts.poppins(
+                          color: Colors.black,
+                          fontSize: 13,
+                          fontWeight: FontWeight.w700
+                        ),
+                      ),
+
+                      const SizedBox(height: 7.5,),
+
+                      // aligns the date to the left
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          "${formatDateIntoWords(news['pub_date'])} - ${news['tag']['name']}",
+                          style: GoogleFonts.poppins(
+                            color:  Colors.black54,
+                            fontSize: 10,
+                            fontWeight: FontWeight.w500
+                          ),
+                        ),
+                      ),
+                      
+                    ],
+                  ),
+                )
+              )
+            ],
+          )
+        )
+      )
+    );
+  }
+
+}
+
 
 /// This row contains the icons of all the social media platforms the APL is available on. Clicking an icon navigates you to the APL's profile page for that platform.
 class SocialMediaIconsRow extends StatelessWidget {
 
   /// This row contains the icons of all the social media platforms the APL is available on. Clicking an icon navigates you to the APL's profile page for that platform.
   const SocialMediaIconsRow(
-    {
+    { 
       super.key, 
     }
   );
@@ -1057,7 +1198,7 @@ class SocialMediaIconsRow extends StatelessWidget {
           icon: const Icon(
             FontAwesomeIcons.snapchat,
             color: Colors.white,
-            size: 20,
+            size: 18,
           ),
         ),
         IconButton(
@@ -1065,7 +1206,7 @@ class SocialMediaIconsRow extends StatelessWidget {
           icon: const Icon(
             FontAwesomeIcons.instagram,
             color: Colors.white,
-            size: 20,
+            size: 18,
           ),
         ),
         IconButton(
@@ -1073,7 +1214,7 @@ class SocialMediaIconsRow extends StatelessWidget {
           icon: const Icon(
             FontAwesomeIcons.twitter,
             color: Colors.white,
-            size: 20,
+            size: 18,
           ),
         ),
         IconButton(
@@ -1081,7 +1222,7 @@ class SocialMediaIconsRow extends StatelessWidget {
           icon: const Icon(
             FontAwesomeIcons.youtube,
             color: Colors.white,
-            size: 20,
+            size: 18,
           ),
         ),
       ],

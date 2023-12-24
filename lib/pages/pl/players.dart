@@ -14,9 +14,6 @@ class Players extends StatefulWidget {
 
 class PlayersState extends State<Players> {
 
-  Future<List<Map<String,dynamic>>> _getPlayers () async {
-    return await getPlayers();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,11 +27,11 @@ class PlayersState extends State<Players> {
         body: RefreshIndicator(
           onRefresh: () async {
             setState(() {
-              _getPlayers();
+              getPlayers();
             });
           },
           child: AppFutureBuilder(
-            future: _getPlayers(),
+            future: getPlayers(),
             builder: (data) {
               return ListView.builder(
                 itemCount: data.length,
@@ -46,10 +43,10 @@ class PlayersState extends State<Players> {
                 },
               ); 
             },
-            couldNotLoadText: "players",
+            errorText: "players",
             reloadPageFunction: () {
               setState(() {
-                _getPlayers();
+                getPlayers();
               });
             },
           )

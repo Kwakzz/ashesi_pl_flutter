@@ -1,14 +1,13 @@
 import 'get.dart';
 
-String _path = '/news/';
+String _path = '/news-item/';
 
 
 /// This function sends a GET request to the server to get a list of news items.
-Future<Map<String,dynamic>> getNewsItems () async {
+Future<List<Map<String,dynamic>>> getNewsItems () async {
   
-    return fetchMap(
+    return fetchListWithoutQueryParams(
       '${_path}get/',
-      {}
     );
     
 }

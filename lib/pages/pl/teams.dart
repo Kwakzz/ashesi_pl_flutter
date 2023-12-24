@@ -14,10 +14,6 @@ class Teams extends StatefulWidget {
 
 class TeamsState extends State<Teams> {
 
-  Future<List<Map<String,dynamic>>> _getTeams () async {
-    return await getTeams();
-  }
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -46,10 +42,10 @@ class TeamsState extends State<Teams> {
                 },
               ); 
             },
-            couldNotLoadText: "teams",
+            errorText: "teams",
             reloadPageFunction: () {
               setState(() {
-                _getTeams();
+                getTeams();
               });
             },
           )

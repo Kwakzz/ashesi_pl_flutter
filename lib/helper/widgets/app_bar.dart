@@ -14,6 +14,7 @@ class RegularAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   final BuildContext prevContext;
 
+  /// Creates a customized app bar with a back button.
   RegularAppBar(
     {
       super.key, 
@@ -49,12 +50,15 @@ class RegularAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 }
 
+
+/// Creates a customized app bar without a back button.
 class RegularAppBarNoBack extends StatelessWidget implements PreferredSizeWidget {
   
   @override
   Size get preferredSize => const Size.fromHeight(60);
   final String title;
 
+  /// Creates a customized app bar without a back button.
   const RegularAppBarNoBack(
     {
       super.key, 
@@ -75,34 +79,43 @@ class RegularAppBarNoBack extends StatelessWidget implements PreferredSizeWidget
 }
 
 
+/// Creates a customized app bar for the latest page. It contains "Ashesi Premier League" text on a red background.
 class APLAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const APLAppBar({Key? key}) : super(key: key);
+
+  /// Creates a customized app bar for the latest page. It contains "Ashesi Premier League" text on a red background.
+  const APLAppBar(
+    {
+      super.key, 
+    }
+  );
 
   @override
-  Size get preferredSize => const Size.fromHeight(120);
+  Size get preferredSize => const Size.fromHeight(80);
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
       elevation: 0,
       toolbarHeight: 80,
-      title: Stack(
+      backgroundColor: Colors.transparent,
+      flexibleSpace: Stack(
         children: [
           Image.asset(
             "assets/menu_rectangle.jpg",
             width: MediaQuery.of(context).size.width,
             fit: BoxFit.cover,
           ),
-          Positioned(
-            top: 60.0, // Adjust the top position as needed
-            left: 36.0, // Adjust the left position as needed
-            child: Text(
-              'Ashesi Premier League',
-              style: GoogleFonts.poppins(
-                color: Colors.white,
-                fontSize: 20,
-                fontWeight: FontWeight.w900
-              )
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 60),
+              child: Text(
+                'Ashesi Premier League',
+                style: GoogleFonts.poppins(
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w900,
+                ),
+              ),
             ),
           ),
         ],

@@ -84,7 +84,7 @@ class ResultsState extends State<Results> {
                     }
                   });
                 },
-                couldNotLoadText: "seasons",
+                errorText: "seasons",
               ),
 
               // Check if _selectedSeason is available before building the results
@@ -93,6 +93,14 @@ class ResultsState extends State<Results> {
                   child: AppFutureBuilder(
                     future: getSeasonResults(_selectedSeason['id']),
                     builder: (data) {
+                      if (data.length == 0) {
+                        return Center(
+                          child: RegularText(
+                            text: "No results found.",
+                            color: Colors.black,
+                          ),
+                        );
+                      }
                       return ListView.builder(
                         itemCount: data.length,
                         itemBuilder: (context, index) {
@@ -136,7 +144,7 @@ class ResultsState extends State<Results> {
                         }
                       });
                     },
-                    couldNotLoadText: "results",
+                    errorText: "results",
                   ),
                 )
               else
