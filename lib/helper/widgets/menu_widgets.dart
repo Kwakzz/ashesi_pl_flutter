@@ -585,8 +585,8 @@ class MenuRectangle extends StatelessWidget {
                   margin: const EdgeInsets.only(top: 20),
                   child: Image.network(
                     playerImageLink,
-                    width: 130,
-                    height: 130,
+                    width: 140,
+                    height: 140,
                     errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
                       return const Icon(Icons.error, color: Colors.white,);
                     }
@@ -1243,7 +1243,7 @@ class NewsItem extends StatelessWidget {
           child: Text(
             news['text'],
             style: GoogleFonts.poppins(
-              fontSize: 16,
+              fontSize: 13,
             ),
           ),
         ),

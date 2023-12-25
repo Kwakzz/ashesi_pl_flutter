@@ -1,6 +1,6 @@
 import 'package:ashesi_premier_league/helper/widgets/app_bar.dart';
-import 'package:ashesi_premier_league/pages/stats/mens_top_scorers.dart';
-import 'package:ashesi_premier_league/pages/stats/womens_top_scorers.dart';
+import 'package:ashesi_premier_league/pages/stats/stats_table.dart';
+import 'package:ashesi_premier_league/requests/stats.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -106,4 +106,47 @@ class TopScorersEntryState extends State<TopScorersEntry> {
     );
   }
 
+}
+
+
+class MensTopScorers extends StatefulWidget {
+  const MensTopScorers({Key? key}) : super(key: key);
+
+  @override
+  MensTopScorersState createState() => MensTopScorersState();
+}
+
+class MensTopScorersState extends State<MensTopScorers> {
+
+
+
+  @override
+  Widget build(BuildContext context) {
+
+    return const StatsTable(
+      function: getSeasonMensTopScorers,
+      errorTextForTopPlayer: "top scorer for this season",
+      errorTextForTable: "top scorers for this season",
+    );
+    
+  }
+}
+
+
+class WomensTopScorers extends StatefulWidget {
+  const WomensTopScorers({Key? key}) : super(key: key);
+
+  @override
+  WomensTopScorersState createState() => WomensTopScorersState();
+}
+
+class WomensTopScorersState extends State<WomensTopScorers> {
+  @override
+  Widget build(BuildContext context) {
+    return const StatsTable(
+      function: getSeasonWomensTopScorers,
+      errorTextForTopPlayer: "top scorer for this season",
+      errorTextForTable: "top scorers for this season",
+    );
+  }
 }

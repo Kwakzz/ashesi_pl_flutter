@@ -1,5 +1,7 @@
 import 'package:ashesi_premier_league/helper/widgets/menu_widgets.dart';
+import 'package:ashesi_premier_league/pages/stats/top_assisters_entry.dart';
 import 'package:ashesi_premier_league/pages/stats/top_scorers.dart';
+import 'package:ashesi_premier_league/pages/stats/yellow_card_rankings.dart';
 import 'package:flutter/material.dart';
 
 
@@ -39,7 +41,7 @@ class StatsState extends State<Stats> {
         const SizedBox(height: 20),
 
         MenuRectangle(
-          playerImageLink: "https://www.footyrenders.com/render/jude-bellingham-1.png",
+          playerImageLink: "https://www.footyrenders.com/render/cristiano-ronaldo-9.png",
           title: "GOALS",
           onTap: () {
             Navigator.push(
@@ -54,19 +56,46 @@ class StatsState extends State<Stats> {
         MenuRectangle(
           playerImageLink: "https://www.footyrenders.com/render/jude-bellingham-1.png",
           title: "ASSISTS",
-          onTap: () {}
+          onTap: () {
+            Navigator.push(
+              context, 
+              MaterialPageRoute(
+                builder: (context) => const TopAssistersEntry()
+              )
+            );
+          }
         ),
 
         MenuRectangle(
-          playerImageLink: "https://www.footyrenders.com/render/jude-bellingham-1.png",
+          playerImageLink: "https://www.footyrenders.com/render/emiliano-martinez-7.png",
           title: "CLEAN SHEETS",
           onTap: () {}
         ),
 
         MenuRectangle(
-          playerImageLink: "https://www.footyrenders.com/render/jude-bellingham-1.png",
-          title: "FOULS",
-          onTap: () {}
+          playerImageLink: "https://www.footyrenders.com/render/cole-palmer-4.png",
+          title: "YELLOW CARDS",
+          onTap: () {
+            Navigator.push(
+              context, 
+              MaterialPageRoute(
+                builder: (context) => const YellowCardRankingEntry()
+              )
+            );
+          }
+        ),
+
+        MenuRectangle(
+          playerImageLink: "https://www.footyrenders.com/render/nicolas-jackson-3.png",
+          title: "RED CARDS",
+          onTap: () {
+            Navigator.push(
+              context, 
+              MaterialPageRoute(
+                builder: (context) => const YellowCardRankingEntry()
+              )
+            );
+          }
         ),
 
       ]
