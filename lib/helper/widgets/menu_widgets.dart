@@ -1,5 +1,7 @@
 // ignore_for_file: must_be_immutable
 import 'package:ashesi_premier_league/helper/functions/date_time.dart';
+import 'package:ashesi_premier_league/helper/widgets/text.dart';
+import 'package:ashesi_premier_league/pages/pl/view_news.dart';
 import 'package:ashesi_premier_league/pages/pl/view_player.dart';
 import 'package:ashesi_premier_league/pages/pl/view_team.dart';
 import 'package:flutter/material.dart';
@@ -1046,7 +1048,14 @@ class FeatureNewsItem extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){},
+      onTap: (){
+        Navigator.push(
+          context, 
+          MaterialPageRoute(
+            builder: (context) => ViewNews(news: news)
+          )
+        );
+      },
       child: Container(
         height: 300,
         margin: const EdgeInsets.only(bottom: 10),
@@ -1115,7 +1124,14 @@ class NewsListTile extends StatelessWidget{
   Widget build(BuildContext context) {
     return Center(
       child:GestureDetector(
-        onTap: (){},
+        onTap: (){
+          Navigator.push(
+            context, 
+            MaterialPageRoute(
+              builder: (context) => ViewNews(news: news)
+            )
+          );
+        },
         child: Container(
           height: 110,
           margin: const EdgeInsets.only(bottom: 10),
@@ -1178,6 +1194,67 @@ class NewsListTile extends StatelessWidget{
 }
 
 
+class NewsItem extends StatelessWidget {
+
+  const NewsItem(
+    {
+      super.key,
+      required this.news
+    }
+  );
+
+  final Map<String,dynamic> news;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+      children: [
+        Image.network(
+          news['featured_image'],
+          fit: BoxFit.cover,
+        ),
+        const SizedBox(height: 20),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Text(
+            news['title'],
+            style: GoogleFonts.poppins(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+
+        const SizedBox(height: 10),
+
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Text(
+            "${news['tag']['name']} | ${formatDateIntoWords(news['pub_date'])}",
+            style: GoogleFonts.poppins(
+              fontSize: 12,
+            ),
+          ),
+        ),
+
+        const SizedBox(height: 20),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Text(
+            news['text'],
+            style: GoogleFonts.poppins(
+              fontSize: 16,
+            ),
+          ),
+        ),
+        const SizedBox(height: 20),
+      ],
+    );
+  }
+
+}
+
+
 /// This row contains the icons of all the social media platforms the APL is available on. Clicking an icon navigates you to the APL's profile page for that platform.
 class SocialMediaIconsRow extends StatelessWidget {
 
@@ -1226,6 +1303,208 @@ class SocialMediaIconsRow extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+
+}
+
+
+
+/// This is used to display player rankings in the Stats page.
+class PlayerRankings extends StatelessWidget {
+
+  /// This is used to display player rankings in the Stats page.
+  const PlayerRankings(
+    {
+      super.key,
+      required this.players,
+      required this.stat
+    }
+  );
+
+  final List<Map<String, dynamic>> players;
+  final String stat;
+
+  @override
+  Widget build(BuildContext context) {
+    return DataTable(
+      columns: <DataColumn>[
+
+        // pos
+        const DataColumn(
+          label: HeaderText(
+            text: 'Pos',
+            color: Color.fromARGB(255, 53, 52, 52),
+            fontSize: 11,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+
+        // name
+        const DataColumn(
+          label: HeaderText(
+            text: 'Name',
+            color: Color.fromARGB(255, 53, 52, 52),
+            fontSize: 11,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+
+        // team
+        const DataColumn(
+          label: HeaderText(
+            text: 'Team',
+            color: Color.fromARGB(255, 53, 52, 52),
+            fontSize: 11,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+
+            // goals      
+        DataColumn(
+          label: HeaderText(
+            text: stat,
+            color: const Color.fromARGB(255, 53, 52, 52),
+            fontSize: 11,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ],
+
+      rows: players.map((player) => DataRow(
+          cells: [
+
+            // pos
+            DataCell(
+              HeaderText(
+                // index + 1 because index starts at 0
+                text: (players.indexOf(player) + 1).toString(),
+                color: Colors.black,
+                fontSize: 14,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+
+            // name
+            DataCell(
+              HeaderText(
+                // pick only the first of the player's first names
+                text:'${player['first_name'].toString().split(' ')[0]} ${player['last_name']}',
+                color: Colors.black,
+                fontSize: 13,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+
+            // team
+            DataCell(
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Image.network(
+                    player['team_logo_url'],
+                    width: 20,
+                    height: 20,
+                    errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
+                      return const Icon(Icons.error, color: Colors.white,);
+                    }
+                  ),
+                  HeaderText(
+                    text: player['team_name_abbreviation'].toString(),
+                    color: Colors.black,
+                    fontSize: 13,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ]
+              )
+            ),
+
+            // goals
+            DataCell(
+              HeaderText(
+                text: player['no_of_goals'].toString(),
+                color: Colors.black,
+                fontSize: 14,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ],
+        )
+      ).toList(),
+    );
+  }
+  
+}
+
+class HighestRankedPlayer extends StatelessWidget {
+
+  const HighestRankedPlayer(
+    {
+      super.key,
+      required this.player,
+    }
+  );
+
+  final Map<String, dynamic> player;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 130,
+      padding: const EdgeInsets.only(left:30, right:30),
+      decoration:  BoxDecoration(
+        image: DecorationImage(
+          image:const AssetImage("assets/menu_rectangle.jpg"),
+          colorFilter: ColorFilter.mode(Color(int.parse('0xFF${player['team_color']}')).withOpacity(1), BlendMode.hue),
+          fit: BoxFit.cover,
+        ),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+
+
+
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  player['first_name'],
+                  style: GoogleFonts.poppins(
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+
+                Text(
+                  player['last_name'],
+                  style: GoogleFonts.poppins(
+                    color: Colors.white,
+                    fontSize: 25,
+                    fontWeight: FontWeight.w900
+                  )
+                ),
+              ],
+            )
+          ),
+
+          ClipRect(
+            child: Container(
+              margin: const EdgeInsets.only(top: 20),
+              child: Image.network(
+                player['image'] ?? "https://www.footyrenders.com/render/cole-palmer-5.png",
+                width: 130,
+                height: 130,
+                errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
+                  return const Icon(Icons.error, color: Colors.white,);
+                }
+              ),
+            )
+          )
+        ],
+      ),
     );
   }
 

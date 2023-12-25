@@ -39,7 +39,7 @@ String formatDateIntoWords(String dateTimeString) {
   String month = DateFormat.MMMM().format(dateTime); // Month
   String weekday = DateFormat.EEEE().format(dateTime); // Full day of the week
 
-  return "${weekday.substring(0, 3)} $day ${month.substring(0, 3)}" ;
+  return "${weekday.substring(0, 3)} $day ${month.substring(0, 3)} ${dateTime.year}" ;
 }
 
 

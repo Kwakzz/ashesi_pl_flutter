@@ -1,4 +1,5 @@
 import 'package:ashesi_premier_league/helper/widgets/menu_widgets.dart';
+import 'package:ashesi_premier_league/pages/stats/top_scorers.dart';
 import 'package:flutter/material.dart';
 
 
@@ -40,7 +41,14 @@ class StatsState extends State<Stats> {
         MenuRectangle(
           playerImageLink: "https://www.footyrenders.com/render/jude-bellingham-1.png",
           title: "GOALS",
-          onTap: () {}
+          onTap: () {
+            Navigator.push(
+              context, 
+              MaterialPageRoute(
+                builder: (context) => const TopScorersEntry()
+              )
+            );
+          }
         ),
 
         MenuRectangle(
