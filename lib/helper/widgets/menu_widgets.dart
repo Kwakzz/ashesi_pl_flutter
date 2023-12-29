@@ -180,6 +180,92 @@ class MoreListTile extends StatelessWidget {
 }
 
 
+  /// This list tile is used to display a coach's name and team Coaches page.
+class CoachListTile extends StatelessWidget {
+
+  /// This list tile is used to display a coach's name and team Coaches page.
+  const CoachListTile(
+    {
+      super.key, 
+      required this.coach
+    }
+  );
+
+  final Map<String,dynamic> coach;
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Container(
+        padding: const EdgeInsets.all(1),
+        margin: const EdgeInsets.only(top: 2.5, bottom: 2.5, left: 10, right: 10),
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+          border: Border(
+            bottom: BorderSide(
+              color: Colors.grey,
+              width: 0.2,
+              style: BorderStyle.solid
+            )
+          )
+        ),
+        
+        child: ListTile(
+          title: RichText(
+            text: TextSpan(
+              style: DefaultTextStyle.of(context).style,
+              children: <TextSpan>[
+                TextSpan(
+                  text: coach['first_name'] ?? "No first name",
+                  style: GoogleFonts.poppins(
+                    fontSize: 12,
+                    color:Colors.black,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+                const TextSpan(
+                  text: " ",        
+                ),
+                TextSpan(
+                  text: coach['last_name'].toString().toUpperCase(),
+                  style: GoogleFonts.poppins(
+                    fontSize: 13,
+                    color:Colors.black,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ],
+          )
+          ),
+          subtitle: Text(
+            coach['team']['name'] ?? "No team",
+            style: GoogleFonts.poppins(
+              fontSize: 12,
+              color:  Colors.black87,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+          trailing: const Icon(
+            Icons.arrow_forward_ios,
+            color: Colors.black,
+            size: 9,
+          ),
+          onTap: (){
+            Navigator.push(
+              context, 
+              MaterialPageRoute(
+                builder: (context) => ViewPlayer(player: coach)
+              )
+            );
+          },
+        )
+      )
+    );
+  }
+
+}
+
+
 /// This list tile is used to display a player's name, team and image in the Players page.
 class PlayerListTile extends StatelessWidget {
 

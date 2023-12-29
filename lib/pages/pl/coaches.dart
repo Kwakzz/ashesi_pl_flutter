@@ -1,7 +1,7 @@
 import 'package:ashesi_premier_league/helper/widgets/app_bar.dart';
 import 'package:ashesi_premier_league/helper/widgets/future_builder.dart';
 import 'package:ashesi_premier_league/helper/widgets/menu_widgets.dart';
-import 'package:ashesi_premier_league/requests/players.dart';
+import 'package:ashesi_premier_league/requests/coaches.dart';
 import 'package:flutter/material.dart';
 
 
@@ -30,26 +30,26 @@ class CoachesState extends State<Coaches> {
         body: RefreshIndicator(
           onRefresh: () async {
             setState(() {
-              getPlayers();
+              getCoaches();
             });
           },
           child: AppFutureBuilder(
-            future: getPlayers(),
+            future: getCoaches(),
             builder: (data) {
               return ListView.builder(
                 itemCount: data.length,
                 itemBuilder: (context, index) {
 
-                  final player = data[index];
+                  final coach = data[index];
 
-                  return PlayerListTile(player: player);
+                  return CoachListTile(coach: coach);
                 },
               ); 
             },
-            errorText: "players",
+            errorText: "coaches",
             reloadPageFunction: () {
               setState(() {
-                getPlayers();
+                getCoaches();
               });
             },
           )
