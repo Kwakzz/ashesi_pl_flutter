@@ -2117,18 +2117,23 @@ class HomePageResult extends StatelessWidget {
   const HomePageResult(
     {
       super.key, 
-      required this.onTap,
       required this.result
     }
   );
 
-  final void Function()? onTap;
   final Map<String,dynamic> result; 
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,
+      onTap: () {
+        Navigator.push(
+          context, 
+          MaterialPageRoute(
+            builder: (context) => ResultDetails(result: result)
+          )
+        );
+      },
       child: Center(
         child: Container(
           height: 180,
@@ -2282,8 +2287,10 @@ class HomepageHeading extends StatelessWidget {
 }
 
 
+/// This is used as a button in the Home page. It is used to navigate to the different pages in the app.
 class HomePageButton extends StatelessWidget {
 
+  /// This is used as a button in the Home page. It is used to navigate to the different pages in the app.
   const HomePageButton(
     {
       super.key,
@@ -2323,6 +2330,334 @@ class HomePageButton extends StatelessWidget {
       )
     );
           
+  }
+
+}
+
+
+/// This is used to display a match event in the Results page. It displays the event type, the player's name, and the minute the event occured.
+class MatchEventCard extends StatelessWidget {
+
+  /// This is used to display a match event in the Results page. It displays the event type, the player's name, and the minute the event occured.
+  const MatchEventCard(
+    {
+      super.key,
+      required this.event,
+    }
+  );
+
+  final Map<String, dynamic> event;
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Container(
+        height: 110,
+        margin: const EdgeInsets.all(10),
+        padding: const EdgeInsets.only(left:30, right:30),
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: const AssetImage("assets/menu_rectangle.jpg"),
+            colorFilter: ColorFilter.mode(Color(int.parse('0xFF${event['player']['team']['color']}')).withOpacity(1), BlendMode.hue),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Expanded(
+              child: Column(
+
+                mainAxisAlignment: MainAxisAlignment.center,
+                
+                children:[
+
+                  Text(
+                    event['event_type'].toString().toUpperCase(),
+                    style: GoogleFonts.poppins(
+                      fontStyle: FontStyle.italic,
+                      color: 
+                        (event['event_type'] == "Yellow Card") ? Colors.yellow : (event['event_type'] == "Red Card") ? Colors.red : Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w900
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+
+                  Text(
+                    "${event['player']['first_name']} ${event['player']['last_name'].toString().toUpperCase()}",
+                    style: GoogleFonts.poppins(
+                      fontStyle: FontStyle.italic,
+                      color: Colors.white,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w800
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+
+                  Text(
+                    "${event['minute'].toString()}'",
+                    style: GoogleFonts.poppins(
+                      color: Colors.white,
+                      fontStyle: FontStyle.italic,
+                      fontSize: 10,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ]
+              ),
+            ),
+
+            ClipRect(
+              child: Container(
+                margin: const EdgeInsets.only(top: 20),
+                child: Image.network(
+                  "https://www.footyrenders.com/render/jude-bellingham-1.png",
+                  width: 140,
+                  height: 140,
+                  errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
+                    return const Icon(Icons.error, color: Colors.white,);
+                  }
+                ),
+              )
+            )
+          ],
+        ),
+      )
+    );
+  }
+
+}
+
+
+
+/// This is used to display the match events in the Results page.
+class MatchEventsList extends StatelessWidget {
+
+  /// This is used to display the match events in the Results page.
+  const MatchEventsList({
+    super.key,
+    required this.teamOneEvents,
+    required this.teamTwoEvents,
+    required this.result,
+  });
+
+  final List<Map<String, dynamic>> teamOneEvents;
+  final List<Map<String, dynamic>> teamTwoEvents;
+  final Map<String, dynamic> result;
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+
+          const SizedBox(height: 20,),
+
+          Center(
+            child: Text (
+              result['home_team']['name'].toString().toUpperCase(),
+              style: GoogleFonts.poppins(
+                color: Color(int.parse('0xFF${result['home_team']['color']}')).withOpacity(1),
+                fontStyle: FontStyle.italic,
+                fontSize: 25,
+                fontWeight: FontWeight.w700
+              ),
+            ),
+          ),
+          
+          if (teamOneEvents.isNotEmpty)
+            ListView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: teamOneEvents.length,
+              itemBuilder: (context, index) {
+                return MatchEventCard(event: teamOneEvents[index]);
+              },
+            ),
+        
+          const SizedBox(height: 20,),
+
+          Divider(
+            color: Colors.black.withOpacity(0.1),
+            thickness: 1,
+          ),
+
+          const SizedBox(height: 20,),
+
+          Center(
+            child: Text (
+              result['away_team']['name'].toString().toUpperCase(),
+              style: GoogleFonts.poppins(
+                fontStyle: FontStyle.italic,
+                color: Color(int.parse('0xFF${result['away_team']['color']}')).withOpacity(1),
+                fontSize: 25,
+                fontWeight: FontWeight.w700
+              ),
+            ),
+          ),
+
+          if (teamTwoEvents.isNotEmpty)
+            ListView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: teamTwoEvents.length,
+              itemBuilder: (context, index) {
+                return MatchEventCard(event: teamTwoEvents[index]);
+              },
+            ),
+        ],
+      ),
+    );
+  }
+}
+
+
+/// This is used to display information such as the match date, the competition, the match venue, and the match officials in the Match Details page.
+class MatchDetailsRectangle extends StatelessWidget {
+
+  /// This is used to display information such as the match date, the competition, the match venue, and the match officials in the Match Details page.
+  const MatchDetailsRectangle(
+    {
+      super.key, 
+      required this.result
+    }
+  );
+
+  final Map<String,dynamic> result; 
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 220,
+      color: const Color.fromARGB(255, 197, 50, 50),
+      width: MediaQuery.of(context).size.width,
+      padding: const EdgeInsets.only(left:30, right:30,),
+      child: Column(
+        children:[
+
+          const SizedBox(height: 10),
+
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+
+              ClipRect(
+                child: Image.network(
+                  result['home_team']['logo_url'],
+                  width: MediaQuery.of(context).size.width*0.2,
+                  height: 120,
+                  errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
+                    return const Icon(Icons.error, color: Colors.black,);
+                  }
+                ),
+              ),
+
+              Container(
+                padding: const EdgeInsets.fromLTRB(12, 7, 12, 7),
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.all(Radius.circular(5))
+                ),
+                child: Row (
+                  children: [
+                    Text(
+                      result['home_team_score'].toString(),
+                      style: GoogleFonts.poppins(
+                        color: const Color.fromARGB(255, 197, 50, 50),
+                        fontSize: 20,
+                        fontWeight: FontWeight.w800
+                      ),
+                    ),
+
+                    const SizedBox(width: 10,),
+
+                    Text(
+                      "FT",
+                      style: GoogleFonts.poppins(
+                        color: const Color.fromARGB(255, 197, 50, 50),
+                        fontSize: 12,
+                        fontWeight: FontWeight.w600
+                      )
+                    ),
+
+                    const SizedBox(width: 10,),
+
+                    Text(
+                      result['away_team_score'].toString(),
+                      style: GoogleFonts.poppins(
+                        color: const Color.fromARGB(255, 197, 50, 50),
+                        fontSize: 20,
+                        fontWeight: FontWeight.w800
+                      ),
+                    ),
+                  ],
+                ),
+
+
+              ),
+              
+
+              ClipRect(
+                child: Image.network(
+                  result['away_team']['logo_url'],
+                  width: MediaQuery.of(context).size.width*0.2,
+                  height: 120,
+                  errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
+                    return const Icon(Icons.error, color: Colors.black,);
+                  }
+                ),
+              )
+              
+            ],
+          ),
+
+          const SizedBox(height: 5),
+
+          Text(
+            "${result['competition']['name'].toString().toUpperCase()} (${result['competition']['gender']})",
+            style: GoogleFonts.poppins(
+              color: Colors.white,
+              fontSize: 12,
+              fontWeight: FontWeight.w600,
+              letterSpacing: 2
+            )
+          ),
+
+          Text(
+            "Kickoff at ${formatTime(result['match_time'])}",
+            style: GoogleFonts.poppins(
+              color: Colors.white,
+              fontSize: 12,
+              fontWeight: FontWeight.w400,
+            )
+          ),
+
+          Text(
+            formatDateIntoWords(result['match_day']['date']),
+            style: GoogleFonts.poppins(
+              color: Colors.white,
+              fontSize: 11,
+              fontWeight: FontWeight.w400,
+            )
+          ),
+
+
+          Text(
+            "Referee: ${result['referee']['first_name']} ${result['referee']['last_name']}",
+            style: GoogleFonts.poppins(
+              color: Colors.white,
+              fontSize: 11,
+              fontWeight: FontWeight.w400,
+            )
+          ),
+
+
+        ]
+      )
+      
+    
+    );
   }
 
 }

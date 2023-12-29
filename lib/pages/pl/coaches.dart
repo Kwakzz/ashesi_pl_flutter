@@ -5,17 +5,17 @@ import 'package:ashesi_premier_league/requests/players.dart';
 import 'package:flutter/material.dart';
 
 
-class Players extends StatefulWidget {
-  
-  const Players({
+class Coaches extends StatefulWidget {
+
+  const Coaches({
     super.key
   });
 
   @override
-  PlayersState createState() => PlayersState();
+  CoachesState createState() => CoachesState();
 }
 
-class PlayersState extends State<Players> {
+class CoachesState extends State<Coaches> {
 
 
   @override
@@ -24,7 +24,7 @@ class PlayersState extends State<Players> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: RegularAppBar(
-          title: 'Players',
+          title: 'Coaches',
           prevContext: context,
         ),
         body: RefreshIndicator(

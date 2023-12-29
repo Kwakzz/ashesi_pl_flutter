@@ -35,7 +35,7 @@ class AppFutureBuilder extends StatelessWidget {
               return Center(
                 child: RegularText(
                   text: "No $errorText found.",
-                  color: Colors.black,
+                  color: errorTextColor,
                 ),
               );
             }

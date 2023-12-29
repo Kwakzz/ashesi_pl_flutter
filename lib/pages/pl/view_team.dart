@@ -62,7 +62,17 @@ class ViewTeamState extends State<ViewTeam> {
 
               ViewTeamListTile(
                 title: "Twitter", 
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context, 
+                    MaterialPageRoute(
+                      builder: (context) => WebPage(
+                        pageName: "X",
+                        url: widget.team['twitter_url'],
+                      )
+                    )
+                  );
+                },
                 iconData: FontAwesomeIcons.twitter,
                 team: widget.team,
               ),

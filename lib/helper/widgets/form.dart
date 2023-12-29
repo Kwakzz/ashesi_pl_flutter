@@ -136,7 +136,7 @@ class SubmitFormButton extends StatelessWidget {
         child: ElevatedButton(
           onPressed: onPressed,
           style: ElevatedButton.styleFrom(
-            foregroundColor: Colors.white, backgroundColor: const Color.fromRGBO(14, 66, 168, 1),
+            foregroundColor: Colors.white, backgroundColor: const Color.fromRGBO(197, 50, 50, 1),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),
             ),
@@ -146,7 +146,7 @@ class SubmitFormButton extends StatelessWidget {
             style: GoogleFonts.montserrat(
               fontSize: 12,
               color: Colors.white,
-              fontWeight: FontWeight.w500,
+              fontWeight: FontWeight.w600,
             ),
           ),
         ),

@@ -56,7 +56,7 @@ class NewsState extends State<News> {
                     getNewsItems();
                   });
                 }, 
-                errorText: "news items",
+                errorText: "news item",
                 errorTextColor: Colors.white,
               ),
 

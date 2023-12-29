@@ -85,7 +85,6 @@ class LatestState extends State<Latest> {
                         final result = data[index];
                         return HomePageResult(
                           result: result,
-                          onTap: (){},
                         );
                       },
                     ),
