@@ -1,5 +1,5 @@
 import 'package:ashesi_premier_league/helper/widgets/app_bar.dart';
-import 'package:ashesi_premier_league/pages/stats/stats_table.dart';
+import 'package:ashesi_premier_league/pages/stats/rankings.dart';
 import 'package:ashesi_premier_league/requests/stats.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -78,7 +78,7 @@ class RedCardRankingEntryState extends State<RedCardRankingEntry> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: RegularAppBar(
-          title: "Yellow Cards",
+          title: "Red Cards",
           prevContext: context
         ),
         body: widgetOptions.elementAt(_currentIndex),
@@ -123,7 +123,8 @@ class MensRedCardRankingsState extends State<MensRedCardRankings> {
   @override
   Widget build(BuildContext context) {
 
-    return const StatsTable(
+    return const RankingsPage(
+      stat: "Cards",
       function: getSeasonMensRedCardRankings,
       errorTextForTopPlayer: "player with the most red cards",
       errorTextForTable: "players with the most red cards",
@@ -144,7 +145,8 @@ class WomensRedCardRankingsState extends State<WomensRedCardRankings> {
   @override
   Widget build(BuildContext context) {
 
-    return const StatsTable(
+    return const RankingsPage(
+      stat: "Cards",
       function: getSeasonWomensRedCardRankings,
       errorTextForTopPlayer: "player with the most red cards",
       errorTextForTable: "players with the most red cards",

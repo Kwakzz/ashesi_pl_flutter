@@ -33,3 +33,12 @@ Future<List<Map<String,dynamic>>> getSeasonResults (int seasonId) async {
     );
     
 }
+
+/// This function sends a GET request to the server to the list of latest results in a season. Results are the matches that have been played.
+Future<List<Map<String,dynamic>>> getLatestResults () async {
+  
+    return fetchListWithoutQueryParams(
+      '${_path}results/latest/get/',
+    );
+    
+}

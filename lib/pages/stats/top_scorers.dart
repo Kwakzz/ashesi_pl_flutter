@@ -1,5 +1,5 @@
 import 'package:ashesi_premier_league/helper/widgets/app_bar.dart';
-import 'package:ashesi_premier_league/pages/stats/stats_table.dart';
+import 'package:ashesi_premier_league/pages/stats/rankings.dart';
 import 'package:ashesi_premier_league/requests/stats.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -78,7 +78,7 @@ class TopScorersEntryState extends State<TopScorersEntry> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: RegularAppBar(
-          title: "Top Scorers",
+          title: "Goals",
           prevContext: context
         ),
         body: widgetOptions.elementAt(_currentIndex),
@@ -123,10 +123,11 @@ class MensTopScorersState extends State<MensTopScorers> {
   @override
   Widget build(BuildContext context) {
 
-    return const StatsTable(
+    return const RankingsPage(
       function: getSeasonMensTopScorers,
       errorTextForTopPlayer: "top scorer for this season",
       errorTextForTable: "top scorers for this season",
+      stat: "Goals",
     );
     
   }
@@ -143,7 +144,8 @@ class WomensTopScorers extends StatefulWidget {
 class WomensTopScorersState extends State<WomensTopScorers> {
   @override
   Widget build(BuildContext context) {
-    return const StatsTable(
+    return const RankingsPage(
+      stat: "Goals",
       function: getSeasonWomensTopScorers,
       errorTextForTopPlayer: "top scorer for this season",
       errorTextForTable: "top scorers for this season",

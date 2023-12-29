@@ -1,5 +1,9 @@
 // ignore_for_file: must_be_immutable
+import 'dart:async';
+import 'package:ashesi_premier_league/pages/pl/result_details.dart';
+import 'package:dots_indicator/dots_indicator.dart'; 
 import 'package:ashesi_premier_league/helper/functions/date_time.dart';
+import 'package:ashesi_premier_league/helper/widgets/app_bar.dart';
 import 'package:ashesi_premier_league/helper/widgets/text.dart';
 import 'package:ashesi_premier_league/pages/pl/view_news.dart';
 import 'package:ashesi_premier_league/pages/pl/view_player.dart';
@@ -7,8 +11,9 @@ import 'package:ashesi_premier_league/pages/pl/view_team.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'special_button.dart';
+import 'package:webview_flutter/webview_flutter.dart';
+
 
 /// This is the default list style used in menus. It is used the APL tab.
 class MenuListTile extends StatelessWidget {
@@ -836,126 +841,136 @@ class Result extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        children:[
+    return GestureDetector(
+      child: Center(
+        child: Column(
+          children:[
 
-          const SizedBox(height: 15),
+            const SizedBox(height: 15),
 
-          Text(
-            "${result['competition']['name']} (${result['competition']['gender']})",
-            style: GoogleFonts.poppins(
-              color: Colors.black87,
-              fontSize: 13,
-              fontWeight: FontWeight.w500
-            )
-          ),
-
-
-          Container(
-            decoration: const BoxDecoration(
-              border: Border(
-                bottom: BorderSide(
-                  color: Colors.grey,
-                  width: 0.2,
-                  style: BorderStyle.solid
-                )
+            Text(
+              "${result['competition']['name']} (${result['competition']['gender']})",
+              style: GoogleFonts.poppins(
+                color: Colors.black87,
+                fontSize: 13,
+                fontWeight: FontWeight.w500
               )
             ),
-            height: 100,
-            child: Row (
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                ClipRect(
-                  child: Image.network(
-                    result['home_team']['logo_url'],
-                    width: MediaQuery.of(context).size.width*0.2,
-                    height: 40,
-                    errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
-                      return const Icon(Icons.error, color: Colors.white,);
-                    }
-                  ),
-                ),
-
-                Text(
-                  result['home_team']['name_abbreviation'],
-                  style: GoogleFonts.poppins(
-                    color: Colors.black,
-                    fontSize: 12,
-                    fontWeight: FontWeight.w500
-                  ),
-                ),
-
-                Container(
-                  padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
-                  decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.all(Radius.circular(10)),
-                    border: Border.all(
-                      color: Colors.grey,
-                      width: 0.2,
-                      style: BorderStyle.solid,
-                    ),
-                  ),
-                  child: RichText(
-                    text: TextSpan(
-                      style: DefaultTextStyle.of(context).style,
-                      children: <TextSpan>[
-                        TextSpan(
-                          text: result['home_team_score'].toString(),
-                          style: GoogleFonts.poppins(
-                            color: const Color.fromARGB(255, 197, 50, 50),
-                            fontSize: 15, // Set the font size for '2'
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        TextSpan(
-                          text: '   FT   ',
-                          style: GoogleFonts.poppins(
-                            color: const Color.fromARGB(255, 197, 50, 50),
-                            fontSize: 11,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        TextSpan(
-                          text: result['away_team_score'].toString(),
-                          style: GoogleFonts.poppins(
-                            color: const Color.fromARGB(255, 197, 50, 50),
-                            fontSize: 15, // Set the font size for '1'
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
 
 
-                Text(
-                  result['away_team']['name_abbreviation'],
-                  style: GoogleFonts.poppins(
-                    color: Colors.black,
-                    fontSize: 12,
-                    fontWeight: FontWeight.w500
-                  ),
-                ),
-                
-
-                ClipRect(
-                  child: Image.network(
-                    result['away_team']['logo_url'],
-                    width: MediaQuery.of(context).size.width*0.2,
-                    height: 40,
-                    errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
-                      return const Icon(Icons.error, color: Colors.white,);
-                    }
-                  ),
+            Container(
+              decoration: const BoxDecoration(
+                border: Border(
+                  bottom: BorderSide(
+                    color: Colors.grey,
+                    width: 0.2,
+                    style: BorderStyle.solid
+                  )
                 )
-              ],
-            )
-          )
-        ]
-      )
+              ),
+              height: 100,
+              child: Row (
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  ClipRect(
+                    child: Image.network(
+                      result['home_team']['logo_url'],
+                      width: MediaQuery.of(context).size.width*0.2,
+                      height: 40,
+                      errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
+                        return const Icon(Icons.error, color: Colors.white,);
+                      }
+                    ),
+                  ),
 
+                  Text(
+                    result['home_team']['name_abbreviation'],
+                    style: GoogleFonts.poppins(
+                      color: Colors.black,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w500
+                    ),
+                  ),
+
+                  Container(
+                    padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
+                    decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.all(Radius.circular(10)),
+                      border: Border.all(
+                        color: Colors.grey,
+                        width: 0.2,
+                        style: BorderStyle.solid,
+                      ),
+                    ),
+                    child: RichText(
+                      text: TextSpan(
+                        style: DefaultTextStyle.of(context).style,
+                        children: <TextSpan>[
+                          TextSpan(
+                            text: result['home_team_score'].toString(),
+                            style: GoogleFonts.poppins(
+                              color: const Color.fromARGB(255, 197, 50, 50),
+                              fontSize: 15, // Set the font size for '2'
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          TextSpan(
+                            text: '   FT   ',
+                            style: GoogleFonts.poppins(
+                              color: const Color.fromARGB(255, 197, 50, 50),
+                              fontSize: 11,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          TextSpan(
+                            text: result['away_team_score'].toString(),
+                            style: GoogleFonts.poppins(
+                              color: const Color.fromARGB(255, 197, 50, 50),
+                              fontSize: 15, // Set the font size for '1'
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+
+
+                  Text(
+                    result['away_team']['name_abbreviation'],
+                    style: GoogleFonts.poppins(
+                      color: Colors.black,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w500
+                    ),
+                  ),
+                  
+
+                  ClipRect(
+                    child: Image.network(
+                      result['away_team']['logo_url'],
+                      width: MediaQuery.of(context).size.width*0.2,
+                      height: 40,
+                      errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
+                        return const Icon(Icons.error, color: Colors.white,);
+                      }
+                    ),
+                  )
+                ],
+              )
+            )
+          ]
+        )
+
+      ),
+      onTap: () {
+        Navigator.push(
+          context, 
+          MaterialPageRoute(
+            builder: (context) => ResultDetails(result: result)
+          )
+        );
+      },
     );
   }
 
@@ -1039,11 +1054,17 @@ class FeatureNewsItem extends StatelessWidget{
   const FeatureNewsItem(
     {
       super.key,
-      required this.news
+      required this.news,
+      this.backgroundColor = Colors.white,
+      this.titleColor = Colors.black,
+      this.tagColor = const Color.fromARGB(255, 197, 50, 50),
     }
   );
 
   final Map<String,dynamic> news;
+  final Color backgroundColor;
+  final Color titleColor;
+  final Color tagColor;
 
   @override
   Widget build(BuildContext context) {
@@ -1059,8 +1080,8 @@ class FeatureNewsItem extends StatelessWidget{
       child: Container(
         height: 300,
         margin: const EdgeInsets.only(bottom: 10),
-        decoration: const BoxDecoration(
-          color: Colors.white
+        decoration: BoxDecoration(
+          color: backgroundColor,
         ),
         child: Column(
           children: [
@@ -1081,7 +1102,7 @@ class FeatureNewsItem extends StatelessWidget{
                   Text(
                     news['title'],
                     style: GoogleFonts.poppins(
-                      color: Colors.black,
+                      color: titleColor,
                       fontSize: 15,
                       fontWeight: FontWeight.w700
                     ),
@@ -1092,7 +1113,7 @@ class FeatureNewsItem extends StatelessWidget{
                   Text(
                     news['tag']['name'],
                     style: GoogleFonts.poppins(
-                      color: const Color.fromARGB(255, 197, 50, 50),
+                      color: tagColor,
                       fontSize: 12,
                       fontWeight: FontWeight.w500
                     ),
@@ -1237,6 +1258,18 @@ class NewsItem extends StatelessWidget {
           ),
         ),
 
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Text(
+            "By ${news['author']['first_name']} ${news['author']['last_name']}",
+            style: GoogleFonts.poppins(
+              fontSize: 12,
+            ),
+          ),
+        ),
+
+
+
         const SizedBox(height: 20),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -1271,23 +1304,47 @@ class SocialMediaIconsRow extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         IconButton(
-          onPressed: () {},
+          onPressed: () {
+
+          },
           icon: const Icon(
             FontAwesomeIcons.snapchat,
             color: Colors.white,
             size: 18,
           ),
         ),
+
         IconButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+              context, 
+              MaterialPageRoute(
+                builder: (context) => WebPage(
+                  pageName: "Instagram",
+                  url: "https://www.instagram.com/ashesi_football/",
+                )
+              )
+            );
+          },
           icon: const Icon(
             FontAwesomeIcons.instagram,
             color: Colors.white,
             size: 18,
           ),
         ),
+
         IconButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+              context, 
+              MaterialPageRoute(
+                builder: (context) => WebPage(
+                  pageName: "X",
+                  url: "https://twitter.com/AshesiFootball",
+                )
+              )
+            );
+          },
           icon: const Icon(
             FontAwesomeIcons.twitter,
             color: Colors.white,
@@ -1387,12 +1444,31 @@ class PlayerRankings extends StatelessWidget {
 
             // name
             DataCell(
-              HeaderText(
-                // pick only the first of the player's first names
-                text:'${player['first_name'].toString().split(' ')[0]} ${player['last_name']}',
-                color: Colors.black,
-                fontSize: 13,
-                fontWeight: FontWeight.w400,
+              RichText(
+                text: TextSpan(
+                  style: DefaultTextStyle.of(context).style,
+                  children: <TextSpan>[
+                    TextSpan(
+                      text: player['first_name'].toString().split(' ')[0],
+                      style: GoogleFonts.poppins(
+                        color: Colors.black,
+                        fontSize: 11,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                    const TextSpan(
+                      text: " ",        
+                    ),
+                    TextSpan(
+                      text: player['last_name'].toString().toUpperCase(),
+                      style: GoogleFonts.poppins(
+                        color: Colors.black,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
 
@@ -1419,10 +1495,12 @@ class PlayerRankings extends StatelessWidget {
               )
             ),
 
-            // goals
+            // stats
             DataCell(
               HeaderText(
-                text: player['no_of_goals'].toString(),
+                text: (stat == "Goals") ? player['no_of_goals'].toString()
+                    : (stat == "Assists") ? player['no_of_assists'].toString()
+                    : player['no_of_cards'].toString(),
                 color: Colors.black,
                 fontSize: 14,
                 fontWeight: FontWeight.w600,
@@ -1473,7 +1551,7 @@ class HighestRankedPlayer extends StatelessWidget {
                   player['first_name'],
                   style: GoogleFonts.poppins(
                     color: Colors.white,
-                    fontSize: 20,
+                    fontSize: 15,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -1482,7 +1560,7 @@ class HighestRankedPlayer extends StatelessWidget {
                   player['last_name'],
                   style: GoogleFonts.poppins(
                     color: Colors.white,
-                    fontSize: 25,
+                    fontSize: 20,
                     fontWeight: FontWeight.w900
                   )
                 ),
@@ -1506,6 +1584,745 @@ class HighestRankedPlayer extends StatelessWidget {
         ],
       ),
     );
+  }
+
+}
+
+
+class HighestRankedTeam extends StatelessWidget {
+
+  const HighestRankedTeam(
+    {
+      super.key,
+      required this.team,
+    }
+  );
+
+  final Map<String, dynamic> team;
+
+  @override
+  Widget build(BuildContext context) {
+
+    return Container(
+      height: 130,
+      padding: const EdgeInsets.only(left:30, right:30),
+      decoration:  BoxDecoration(
+        image: DecorationImage(
+          image:const AssetImage("assets/menu_rectangle.jpg"),
+          colorFilter: ColorFilter.mode(Color(int.parse('0xFF${team['team_color']}')).withOpacity(1), BlendMode.hue),
+          fit: BoxFit.cover,
+        ),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+
+
+
+          Expanded(
+            child: Text(
+              team['team_name'],
+              style: GoogleFonts.poppins(
+                color: Colors.white,
+                fontSize: 25,
+                fontWeight: FontWeight.w900
+              )
+            ),
+          ),
+
+          ClipRect(
+            child: Container(
+              margin: const EdgeInsets.only(top: 20, bottom: 20),
+              child: Image.network(
+                team['team_logo_url'],
+                width: 130,
+                height: 130,
+                errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
+                  return const Icon(Icons.error, color: Colors.white,);
+                }
+              ),
+            )
+          )
+        ],
+      ),
+    );
+  }
+
+}
+
+
+/// This is used to display clean sheet rankings in the Stats page.
+class CleanSheetRankingsTable extends StatelessWidget {
+
+  /// This is used to display clean sheet rankings in the Stats page.
+  const CleanSheetRankingsTable(
+    {
+      super.key,
+      required this.teams,
+      required this.stat
+    }
+  );
+
+  final List<Map<String, dynamic>> teams;
+  final String stat;
+
+  @override
+  Widget build(BuildContext context) {
+    return DataTable(
+      columns: <DataColumn>[
+
+        // pos
+        const DataColumn(
+          label: HeaderText(
+            text: 'Pos',
+            color: Color.fromARGB(255, 53, 52, 52),
+            fontSize: 11,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+
+
+        // team
+        const DataColumn(
+          label: HeaderText(
+            text: 'Team',
+            color: Color.fromARGB(255, 53, 52, 52),
+            fontSize: 11,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+
+            // goals      
+        DataColumn(
+          label: HeaderText(
+            text: stat,
+            color: const Color.fromARGB(255, 53, 52, 52),
+            fontSize: 11,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ],
+
+      rows: teams.map((team) => DataRow(
+          cells: [
+
+            // pos
+            DataCell(
+              HeaderText(
+                // index + 1 because index starts at 0
+                text: (teams.indexOf(team) + 1).toString(),
+                color: Colors.black,
+                fontSize: 14,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+
+            // team
+            DataCell(
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Image.network(
+                    team['team_logo_url'],
+                    width: 20,
+                    height: 20,
+                    errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
+                      return const Icon(Icons.error, color: Colors.white,);
+                    }
+                  ),
+                  HeaderText(
+                    text: team['team_name_abbreviation'].toString(),
+                    color: Colors.black,
+                    fontSize: 13,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ]
+              )
+            ),
+
+            // goals
+            DataCell(
+              HeaderText(
+                text: team['no_of_clean_sheets'].toString(),
+                color: Colors.black,
+                fontSize: 14,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ],
+        )
+      ).toList(),
+    );
+  }
+  
+}
+
+
+/// This is used for in-app web pages
+class WebPage extends StatelessWidget {
+
+  // This is used for in-app web pages
+  WebPage(
+    {
+      super.key,
+      required this.url,
+      required this.pageName
+    }
+  );
+
+  final String url;
+  final String pageName;
+
+  final Completer<WebViewController> _controller = Completer<WebViewController>();
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      // app bar
+      appBar: RegularAppBar(
+        title: pageName,
+        prevContext: context,
+      ),
+      body: WebView(
+        initialUrl: url,
+        javascriptMode: JavascriptMode.unrestricted,
+        onWebViewCreated: (WebViewController webViewController) {
+          _controller.complete(webViewController);
+        },
+      )
+    );
+      
+  }
+}
+
+
+
+class StandingsTable extends StatelessWidget {
+
+  const StandingsTable(
+    {
+      super.key,
+      required this.standingsTeams,
+    }
+  );
+
+  final List<dynamic> standingsTeams;
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: DataTable(
+        columnSpacing: MediaQuery.of(context).size.width*0.05,
+        dividerThickness: 0.3,
+        columns: const <DataColumn>[
+
+          // pos
+          DataColumn(
+            label: HeaderText(
+              text: 'Pos',
+              color: Color.fromARGB(255, 53, 52, 52),
+              fontSize: 11,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+
+          // name
+          DataColumn(
+            label: HeaderText(
+              text: 'Club',
+              color: Color.fromARGB(255, 53, 52, 52),
+              fontSize: 11,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+
+          // played
+          DataColumn(
+            label: HeaderText(
+              text: 'PL',
+              color: Color.fromARGB(255, 53, 52, 52),
+              fontSize: 11,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+
+          // wins
+          DataColumn(
+            label: HeaderText(
+              text: 'W',
+              color: Color.fromARGB(255, 53, 52, 52),
+              fontSize: 11,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+
+          // draws      
+          DataColumn(
+            label: HeaderText(
+              text: 'D',
+              color: Color.fromARGB(255, 53, 52, 52),
+              fontSize: 11,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+
+          // losses      
+          DataColumn(
+            label: HeaderText(
+              text: 'L',
+              color: Color.fromARGB(255, 53, 52, 52),
+              fontSize: 11,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+
+          // goal scored      
+          DataColumn(
+            label: HeaderText(
+              text: 'GS',
+              color: Color.fromARGB(255, 53, 52, 52),
+              fontSize: 11,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+
+          // goal conceded      
+          DataColumn(
+            label: HeaderText(
+              text: 'GC',
+              color: Color.fromARGB(255, 53, 52, 52),
+              fontSize: 11,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+
+          // goal difference
+
+          DataColumn(
+            label: HeaderText(
+              text: 'GD',
+              color: Color.fromARGB(255, 53, 52, 52),
+              fontSize: 11,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+
+
+          // points      
+          DataColumn(
+            label: HeaderText(
+              text: 'PTS',
+              color: Color.fromARGB(255, 53, 52, 52),
+              fontSize: 11,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ],
+
+        rows: standingsTeams.map((standingsTeam) => DataRow(
+            cells: [
+
+              // pos
+              DataCell(
+                HeaderText(
+                  // index + 1 because index starts at 0
+                  text: (standingsTeams.indexOf(standingsTeam) + 1).toString(),
+                  color: Colors.black,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+
+              // name
+              DataCell(
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  
+                  children: [
+                    Image.network(
+                      standingsTeam['team']['logo_url'],
+                      width: 20,
+                      height: 20,
+                      errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
+                        return const Icon(Icons.error, color: Colors.white,);
+                      }
+                    ),
+
+                    const Text("  "),
+                    HeaderText(
+                      text: standingsTeam['team']['name_abbreviation'],
+                      color: Colors.black,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ]
+
+                )
+              ),
+
+              // no_played
+              DataCell(
+                HeaderText(
+                  text:standingsTeam['matches_played'].toString(),
+                  color: Colors.black,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+
+
+              // goals
+              DataCell(
+                HeaderText(
+                  text: standingsTeam['matches_won'].toString(),
+                  color: Colors.black,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+
+              DataCell(
+                HeaderText(
+                  text: standingsTeam['matches_drawn'].toString(),
+                  color: Colors.black,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+
+              DataCell(
+                HeaderText(
+                  text: standingsTeam['matches_lost'].toString(),
+                  color: Colors.black,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+
+              DataCell(
+                HeaderText(
+                  text: standingsTeam['goals_for'].toString(),
+                  color: Colors.black,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+
+              DataCell(
+                HeaderText(
+                  text: standingsTeam['goals_against'].toString(),
+                  color: Colors.black,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+
+              DataCell(
+                HeaderText(
+                  text: standingsTeam['goal_difference'].toString(),
+                  color: Colors.black,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+
+              DataCell(
+                HeaderText(
+                  text: standingsTeam['points'].toString(),
+                  color: Colors.black,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ],
+          )
+        ).toList(),
+      )
+    );
+  }
+  
+}
+
+
+class SlidingNews extends StatefulWidget {
+
+  const SlidingNews({
+    super.key,
+    required this.news,
+  });
+
+  final List<Map<String, dynamic>> news;
+
+  @override
+  SlidingNewsState createState() => SlidingNewsState();
+
+}
+
+class SlidingNewsState extends State<SlidingNews> {
+
+  final PageController _pageController = PageController();
+  double  currentPage = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _pageController.addListener(() {
+      setState(() {
+        currentPage = _pageController.page!;
+      });
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        SizedBox(
+          height: 300, 
+          child: PageView.builder(
+            controller: _pageController,
+            itemCount: (widget.news.length > 3) ? 3 : widget.news.length,
+            itemBuilder: (context, index) {
+              return FeatureNewsItem(
+                news: widget.news[index],
+                backgroundColor: const Color.fromARGB(255, 197, 50, 50),
+                titleColor: Colors.white,
+                tagColor: Colors.white,
+              );
+            },
+          ),
+        ),
+        DotsIndicator(
+          dotsCount: (widget.news.length > 3) ? 3 : widget.news.length,
+          position: int.parse(currentPage.toStringAsFixed(0)),
+          decorator: const DotsDecorator(
+            size: Size.square(5.0),
+            activeSize: Size(12.0, 6.0),
+            color: Colors.grey, // Inactive dot color
+            activeColor: Colors.blue, // Active dot color
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+
+/// This is the display for results in the Home page.
+class HomePageResult extends StatelessWidget {
+
+  /// This is the display for results in the Home page.
+  const HomePageResult(
+    {
+      super.key, 
+      required this.onTap,
+      required this.result
+    }
+  );
+
+  final void Function()? onTap;
+  final Map<String,dynamic> result; 
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Center(
+        child: Container(
+          height: 180,
+          width: MediaQuery.of(context).size.width,
+          margin: const EdgeInsets.all(10),
+          padding: const EdgeInsets.only(left:30, right:30),
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("assets/menu_rectangle.jpg"),
+              fit: BoxFit.cover,
+            ),
+          ),
+          child: Column(
+            children:[
+
+              const SizedBox(height: 10),
+
+              Text(
+                formatDateIntoWords(result['match_day']['date']).toString().toUpperCase(),
+                style: GoogleFonts.poppins(
+                  color: Colors.white,
+                  fontSize: 13,
+                  fontWeight: FontWeight.w600,
+                  letterSpacing: 2
+                )
+              ),
+
+              const SizedBox(height: 5),
+
+              Text(
+                "${result['competition']['name'].toString().toUpperCase()} (${result['competition']['gender']})",
+                style: GoogleFonts.poppins(
+                  color: Colors.white,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w400
+                )
+              ),
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+
+                  ClipRect(
+                    child: Image.network(
+                      result['home_team']['logo_url'],
+                      width: MediaQuery.of(context).size.width*0.2,
+                      height: 120,
+                      errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
+                        return const Icon(Icons.error, color: Colors.white,);
+                      }
+                    ),
+                  ),
+
+                  Container(
+                    padding: const EdgeInsets.fromLTRB(12, 7, 12, 7),
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colors.white,
+                        width: 0.5,
+                        style: BorderStyle.solid
+                      )
+                    ),
+                    child: Row (
+                      children: [
+                        Text(
+                          result['home_team_score'].toString(),
+                          style: GoogleFonts.poppins(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w800
+                          ),
+                        ),
+
+                        const SizedBox(width: 10,),
+
+                        Text(
+                          "FT",
+                          style: GoogleFonts.poppins(
+                            color: Colors.white,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w600
+                          )
+                        ),
+
+                        const SizedBox(width: 10,),
+
+                        Text(
+                          result['away_team_score'].toString(),
+                          style: GoogleFonts.poppins(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w800
+                          ),
+                        ),
+                      ],
+                    )
+                  ),
+                  
+
+                  ClipRect(
+                    child: Image.network(
+                      result['away_team']['logo_url'],
+                      width: MediaQuery.of(context).size.width*0.2,
+                      height: 120,
+                      errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
+                        return const Icon(Icons.error, color: Colors.white,);
+                      }
+                    ),
+                  )
+                  
+                ],
+              ),
+            ]
+          )
+        )
+      )
+    );
+  }
+
+}
+
+/// This heading is used for displaying the headings of the different sections in the Home page.
+class HomepageHeading extends StatelessWidget {
+
+  /// This heading is used for displaying the headings of the different sections in the Home page.
+  const HomepageHeading(
+    {
+      super.key,
+      required this.heading,
+    }
+  );
+
+  final String heading;
+
+  @override
+  Widget build(BuildContext context) {
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: Padding(
+        padding: const EdgeInsets.only(left: 20.0),
+        child: HeaderText(
+          text: heading,
+          color: const Color.fromARGB(255, 197, 50, 50),
+          fontSize: 20.0,
+          fontWeight: FontWeight.w700,
+        ),
+      ),
+    );
+  }
+
+}
+
+
+class HomePageButton extends StatelessWidget {
+
+  const HomePageButton(
+    {
+      super.key,
+      required this.navigationPage,
+      required this.text,
+    }
+  );
+
+  final Widget navigationPage;
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        border: Border.all(
+          color: Colors.black.withOpacity(0.1),
+          width: 1.0,
+        )
+      ),
+      child: TextButton(
+        onPressed: () {
+          Navigator.push(
+            context, 
+            MaterialPageRoute(
+              builder: (context) => navigationPage
+            )
+          );
+        },
+        child: HeaderText(
+          text: text,
+          color: const Color.fromARGB(255, 197, 50, 50),
+          fontSize: 12,
+          fontWeight: FontWeight.w500,
+        ),
+      )
+    );
+          
   }
 
 }

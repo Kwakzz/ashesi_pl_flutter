@@ -1,29 +1,29 @@
 import 'package:ashesi_premier_league/helper/widgets/app_bar.dart';
-import 'package:ashesi_premier_league/pages/stats/stats_table.dart';
+import 'package:ashesi_premier_league/pages/stats/rankings.dart';
 import 'package:ashesi_premier_league/requests/stats.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 
 
-class TopAssistersEntry extends StatefulWidget {
-  const TopAssistersEntry(
+class CleanSheetRankingEntry extends StatefulWidget {
+  const CleanSheetRankingEntry(
     {
       super.key
     }
   );
 
   @override
-  TopAssistersEntryState createState() => TopAssistersEntryState();
+  CleanSheetRankingEntryState createState() => CleanSheetRankingEntryState();
 }
 
-class TopAssistersEntryState extends State<TopAssistersEntry> {
+class CleanSheetRankingEntryState extends State<CleanSheetRankingEntry> {
 
   int _currentIndex = 0;
 
   List<Widget> widgetOptions = [
-    const MensTopAssisters(),
-    const WomensTopAssisters()
+    const MensCleanSheetRanking(),
+    const WomensCleanSheetRanking(),
   ];
 
   void onTabTapped(int index) {
@@ -78,7 +78,7 @@ class TopAssistersEntryState extends State<TopAssistersEntry> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: RegularAppBar(
-          title: "Top Assisters",
+          title: "Clean Sheets",
           prevContext: context
         ),
         body: widgetOptions.elementAt(_currentIndex),
@@ -109,59 +109,46 @@ class TopAssistersEntryState extends State<TopAssistersEntry> {
 }
 
 
-
-class MensTopAssisters extends StatefulWidget {
-
-  const MensTopAssisters({
-    super.key
-  });
+class MensCleanSheetRanking extends StatefulWidget {
+  const MensCleanSheetRanking({Key? key}) : super(key: key);
 
   @override
-  MensTopAssistersState createState() => MensTopAssistersState();
+  MensCleanSheetRankingState createState() => MensCleanSheetRankingState();
 }
 
-class MensTopAssistersState extends State<MensTopAssisters> {
+class MensCleanSheetRankingState extends State<MensCleanSheetRanking> {
 
 
 
   @override
   Widget build(BuildContext context) {
 
-    return const StatsTable(
-      function: getSeasonMensTopAssisters,
-      errorTextForTopPlayer: "top assister for this season",
-      errorTextForTable: "top assisters for this season",
+    return const CleanSheetRankingsPage(
+      function: getSeasonMensCleanSheetRankings,
+      errorTextForTopTeam: "team with the most clean sheets",
+      errorTextForTable: "team with the most clean sheets",
     );
     
   }
 }
 
 
-class WomensTopAssisters extends StatefulWidget {
-
-  const WomensTopAssisters({
-    super.key
-  });
+class WomensCleanSheetRanking extends StatefulWidget {
+  const WomensCleanSheetRanking({Key? key}) : super(key: key);
 
   @override
-  WomensTopAssistersState createState() => WomensTopAssistersState();
+  WomensCleanSheetRankingState createState() => WomensCleanSheetRankingState();
 }
 
-class WomensTopAssistersState extends State<WomensTopAssisters> {
-
-
-
+class WomensCleanSheetRankingState extends State<WomensCleanSheetRanking> {
   @override
   Widget build(BuildContext context) {
 
-    return const StatsTable(
-      function: getSeasonWomensTopAssisters,
-      errorTextForTopPlayer: "top assister for this season",
-      errorTextForTable: "top assisters for this season",
+    return const CleanSheetRankingsPage(
+      function: getSeasonWomensCleanSheetRankings,
+      errorTextForTopTeam: "team with the most clean sheets",
+      errorTextForTable: "team with the most clean sheets",
     );
-
-
-
     
   }
 }

@@ -1,5 +1,7 @@
 import 'package:ashesi_premier_league/helper/widgets/menu_widgets.dart';
-import 'package:ashesi_premier_league/pages/stats/top_assisters_entry.dart';
+import 'package:ashesi_premier_league/pages/stats/clean_sheet_rankings.dart';
+import 'package:ashesi_premier_league/pages/stats/red_card_rankings.dart';
+import 'package:ashesi_premier_league/pages/stats/top_assisters.dart';
 import 'package:ashesi_premier_league/pages/stats/top_scorers.dart';
 import 'package:ashesi_premier_league/pages/stats/yellow_card_rankings.dart';
 import 'package:flutter/material.dart';
@@ -69,7 +71,14 @@ class StatsState extends State<Stats> {
         MenuRectangle(
           playerImageLink: "https://www.footyrenders.com/render/emiliano-martinez-7.png",
           title: "CLEAN SHEETS",
-          onTap: () {}
+          onTap: () {
+            Navigator.push(
+              context, 
+              MaterialPageRoute(
+                builder: (context) => const CleanSheetRankingEntry()
+              )
+            );
+          }
         ),
 
         MenuRectangle(
@@ -92,7 +101,7 @@ class StatsState extends State<Stats> {
             Navigator.push(
               context, 
               MaterialPageRoute(
-                builder: (context) => const YellowCardRankingEntry()
+                builder: (context) => const RedCardRankingEntry()
               )
             );
           }

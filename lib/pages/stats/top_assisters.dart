@@ -6,24 +6,24 @@ import 'package:google_fonts/google_fonts.dart';
 
 
 
-class YellowCardRankingEntry extends StatefulWidget {
-  const YellowCardRankingEntry(
+class TopAssistersEntry extends StatefulWidget {
+  const TopAssistersEntry(
     {
       super.key
     }
   );
 
   @override
-  YellowCardRankingEntryState createState() => YellowCardRankingEntryState();
+  TopAssistersEntryState createState() => TopAssistersEntryState();
 }
 
-class YellowCardRankingEntryState extends State<YellowCardRankingEntry> {
+class TopAssistersEntryState extends State<TopAssistersEntry> {
 
   int _currentIndex = 0;
 
   List<Widget> widgetOptions = [
-    const MensYellowCardRankings(),
-    const WomensYellowCardRankings(),
+    const MensTopAssisters(),
+    const WomensTopAssisters()
   ];
 
   void onTabTapped(int index) {
@@ -78,7 +78,7 @@ class YellowCardRankingEntryState extends State<YellowCardRankingEntry> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: RegularAppBar(
-          title: "Yellow Cards",
+          title: "Assists",
           prevContext: context
         ),
         body: widgetOptions.elementAt(_currentIndex),
@@ -109,14 +109,18 @@ class YellowCardRankingEntryState extends State<YellowCardRankingEntry> {
 }
 
 
-class MensYellowCardRankings extends StatefulWidget {
-  const MensYellowCardRankings({Key? key}) : super(key: key);
+
+class MensTopAssisters extends StatefulWidget {
+
+  const MensTopAssisters({
+    super.key
+  });
 
   @override
-  MensYellowCardRankingsState createState() => MensYellowCardRankingsState();
+  MensTopAssistersState createState() => MensTopAssistersState();
 }
 
-class MensYellowCardRankingsState extends State<MensYellowCardRankings> {
+class MensTopAssistersState extends State<MensTopAssisters> {
 
 
 
@@ -124,37 +128,42 @@ class MensYellowCardRankingsState extends State<MensYellowCardRankings> {
   Widget build(BuildContext context) {
 
     return const RankingsPage(
-      stat: "Cards",
-      function: getSeasonMensYellowCardRankings,
-      errorTextForTopPlayer: "player with the most yellow cards",
-      errorTextForTable: "players with the most yellow cards",
+      stat: "Assists",
+      function: getSeasonMensTopAssisters,
+      errorTextForTopPlayer: "top assister for this season",
+      errorTextForTable: "top assisters for this season",
     );
     
   }
 }
 
 
-class WomensYellowCardRankings extends StatefulWidget {
+class WomensTopAssisters extends StatefulWidget {
 
-  const WomensYellowCardRankings({
+  const WomensTopAssisters({
     super.key
   });
 
   @override
-  WomensYellowCardRankingsState createState() => WomensYellowCardRankingsState();
+  WomensTopAssistersState createState() => WomensTopAssistersState();
 }
 
-class WomensYellowCardRankingsState extends State<WomensYellowCardRankings> {
+class WomensTopAssistersState extends State<WomensTopAssisters> {
+
+
 
   @override
   Widget build(BuildContext context) {
 
     return const RankingsPage(
-      stat: "Cards",
-      function: getSeasonWomensYellowCardRankings,
-      errorTextForTopPlayer: "player with the most yellow cards",
-      errorTextForTable: "players with the most yellow cards",
+      stat: "Assists",
+      function: getSeasonWomensTopAssisters,
+      errorTextForTopPlayer: "top assister for this season",
+      errorTextForTable: "top assisters for this season",
     );
+
+
+
     
   }
 }

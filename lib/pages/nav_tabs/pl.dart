@@ -3,6 +3,7 @@ import 'package:ashesi_premier_league/pages/pl/fixtures.dart';
 import 'package:ashesi_premier_league/pages/pl/news.dart';
 import 'package:ashesi_premier_league/pages/pl/players.dart';
 import 'package:ashesi_premier_league/pages/pl/results.dart';
+import 'package:ashesi_premier_league/pages/pl/standings.dart';
 import 'package:ashesi_premier_league/pages/pl/teams.dart';
 import 'package:flutter/material.dart';
 
@@ -75,9 +76,16 @@ class MoreState extends State<Pl> {
         ),
 
         MenuListTile(
-          title: "Tables", 
+          title: "Standings", 
           iconData: Icons.table_chart,
-          onTap: () {}
+          onTap: () {
+            Navigator.push(
+              context, 
+              MaterialPageRoute(
+                builder: (context) => const StandingsEntry()
+              )
+            );
+          }
         ),
 
         const SizedBox(height: 20),

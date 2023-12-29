@@ -1,16 +1,15 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-
 import 'api_uri.dart';
 
 
-/// This is a generic function that sends a POST request to the server.
-Future<Map<String, dynamic>> postData(String path, String body) async {
+/// This is a generic function that sends a PATCH request to the server.
+Future<Map<String, dynamic>> update(String path, String body) async {
   Map<String, dynamic> result = {};
 
   try {
 
-    final response = await http.post(
+    final response = await http.patch(
       Uri.http(domain, path),
       headers: <String, String> {
         'Content-Type': 'application/json',
@@ -21,7 +20,7 @@ Future<Map<String, dynamic>> postData(String path, String body) async {
 
     Map<String, dynamic> responseData = jsonDecode(response.body);
 
-    if (response.statusCode == 201) {
+    if (response.statusCode == 200) {
 
       result = {
         'status': true,
@@ -34,20 +33,25 @@ Future<Map<String, dynamic>> postData(String path, String body) async {
         'status': false,
         'message': responseData["message"] ?? 'An error occurred. Please try again.',
       };
+
     }
 
-  } 
+
+  }
   
   catch (e) {
     result = {
       'status': false,
-      'message': 'Request failed. Error: $e',
+      'message': 'An error occurred. Please try again.'
     };
+
+    
+
+
   }
 
   return result;
 }
-
 
 
 
