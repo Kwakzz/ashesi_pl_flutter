@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable
 import 'dart:async';
 import 'package:ashesi_premier_league/pages/pl/result_details.dart';
+import 'package:ashesi_premier_league/pages/pl/view_coach.dart';
 import 'package:dots_indicator/dots_indicator.dart'; 
 import 'package:ashesi_premier_league/helper/functions/date_time.dart';
 import 'package:ashesi_premier_league/helper/widgets/app_bar.dart';
@@ -254,7 +255,7 @@ class CoachListTile extends StatelessWidget {
             Navigator.push(
               context, 
               MaterialPageRoute(
-                builder: (context) => ViewPlayer(player: coach)
+                builder: (context) => ViewCoach(coach: coach)
               )
             );
           },
