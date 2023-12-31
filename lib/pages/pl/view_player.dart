@@ -87,7 +87,7 @@ class ViewPlayerState extends State<ViewPlayer> {
 
               const LeftAlignedText(
                 text: HeaderText(
-                  text: "Statistics", 
+                  text: "All-Time Statistics", 
                   color: Colors.white,
                   fontSize: 20,
                 )

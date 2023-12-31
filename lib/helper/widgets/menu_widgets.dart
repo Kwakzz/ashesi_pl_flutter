@@ -267,6 +267,102 @@ class CoachListTile extends StatelessWidget {
 }
 
 
+  /// This list tile is used to display a player's name, position and image in the Squad page.
+class PlayerListTileInSquadList extends StatelessWidget {
+
+  /// This list tile is used to display a player's name, position and image in the Squad page.
+  const PlayerListTileInSquadList(
+    {
+      super.key, 
+      required this.player
+    }
+  );
+
+  final Map<String,dynamic> player;
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Container(
+        padding: const EdgeInsets.all(1),
+        margin: const EdgeInsets.only(top: 2.5, bottom: 2.5, left: 10, right: 10),
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+          border: Border(
+            bottom: BorderSide(
+              color: Colors.grey,
+              width: 0.2,
+              style: BorderStyle.solid
+            )
+          )
+        ),
+        
+        child: ListTile(
+          title: RichText(
+            text: TextSpan(
+              style: DefaultTextStyle.of(context).style,
+              children: <TextSpan>[
+                TextSpan(
+                  text: player['first_name'] ?? "No first name",
+                  style: GoogleFonts.poppins(
+                    fontSize: 12,
+                    color:Colors.black,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+                const TextSpan(
+                  text: " ",        
+                ),
+                TextSpan(
+                  text: player['last_name'].toString().toUpperCase(),
+                  style: GoogleFonts.poppins(
+                    fontSize: 13,
+                    color:Colors.black,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ],
+          )
+          ),
+          subtitle: Text(
+            player['position']['name'] ?? "No position",
+            style: GoogleFonts.poppins(
+              fontSize: 12,
+              color:  Colors.black87,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+          leading: ClipRect(
+            child: Image.network(
+              player['image'] ?? "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png",
+              width: 50,
+              height: 50,
+              errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
+                return const Icon(Icons.error, color: Colors.white,);
+              }
+            ),
+          ),
+          trailing: const Icon(
+            Icons.arrow_forward_ios,
+            color: Colors.black,
+            size: 9,
+          ),
+          onTap: (){
+            Navigator.push(
+              context, 
+              MaterialPageRoute(
+                builder: (context) => ViewPlayer(player: player)
+              )
+            );
+          },
+        )
+      )
+    );
+  }
+
+}
+
+
 /// This list tile is used to display a player's name, team and image in the Players page.
 class PlayerListTile extends StatelessWidget {
 
@@ -422,6 +518,52 @@ class TeamListTile extends StatelessWidget {
             ),
           ],
         )
+      )
+    );
+  }
+
+}
+
+
+/// This list tile is used to display a team's stats in the TeamStats page.
+class TeamStatsTile extends StatelessWidget {
+
+  /// This list tile is used to display a team's stats in the TeamStats page.
+  const TeamStatsTile(
+    {
+      super.key, 
+      required this.stat,
+      required this.title,
+      required this.team
+    }
+  );
+
+  final String stat;
+  final String title;
+  final Map<String,dynamic> team;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.only(left: 5, right: 5),
+      color: Colors.white,
+      child: ListTile(
+        title: Text(
+          title.toString().toUpperCase(),
+          style: GoogleFonts.poppins(
+            fontSize: 12,
+            color:  Color(int.parse('0xFF${team['color']}')),
+            fontWeight: FontWeight.w500,
+          ),
+        ),          
+        trailing: Text(
+          stat,
+          style: GoogleFonts.poppins(
+            fontSize: 12,
+            color:  Color(int.parse('0xFF${team['color']}')),
+            fontWeight: FontWeight.w400,
+          ),
+        ),
       )
     );
   }
@@ -1439,7 +1581,17 @@ class SocialMediaIconsRow extends StatelessWidget {
           ),
         ),
         IconButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+              context, 
+              MaterialPageRoute(
+                builder: (context) => WebPage(
+                  pageName: "YouTube",
+                  url: "https://youtube.com/@ashesifootballassociation1182?feature=shared",
+                )
+              )
+            );
+          },
           icon: const Icon(
             FontAwesomeIcons.youtube,
             color: Colors.white,

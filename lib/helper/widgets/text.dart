@@ -158,34 +158,3 @@ class LinkText extends StatelessWidget {
 
 }
 
-class UsernameAndId extends StatelessWidget {
-
-  const UsernameAndId({
-    super.key,
-    required this.userName,
-    required this.userId
-  });
-
-  final String userName;
-  final String userId;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(left: 20, right: 20, top: 20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          HeaderText(
-            text: userName,
-          ),
-          SubHeaderText(
-            text: userId,
-            color: Colors.grey,
-          ),
-        ],
-      )
-    );
-  }
-
-}

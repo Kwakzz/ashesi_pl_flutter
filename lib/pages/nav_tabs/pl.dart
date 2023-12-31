@@ -42,11 +42,11 @@ class MoreState extends State<Pl> {
     return ListView(
       children: [
 
-        NextFixture(
-          onTap: (){}, 
-          team1LogoLink: "https://res.cloudinary.com/dvghxq3ba/image/upload/v1703097680/Team%20Logos/elite_logo_pmbtg5.png",
-          team2LogoLink: "https://res.cloudinary.com/dvghxq3ba/image/upload/v1703097681/Team%20Logos/lu_logo_oailhh.png",
-        ),
+        // NextFixture(
+        //   onTap: (){}, 
+        //   team1LogoLink: "https://res.cloudinary.com/dvghxq3ba/image/upload/v1703097680/Team%20Logos/elite_logo_pmbtg5.png",
+        //   team2LogoLink: "https://res.cloudinary.com/dvghxq3ba/image/upload/v1703097681/Team%20Logos/lu_logo_oailhh.png",
+        // ),
 
         const SizedBox(height: 20),
 
@@ -145,11 +145,11 @@ class MoreState extends State<Pl> {
           }
         ),
 
-        MenuListTile(
-          title: "Videos", 
-          iconData: Icons.movie,
-          onTap: () {}
-        ),
+        // MenuListTile(
+        //   title: "Videos", 
+        //   iconData: Icons.movie,
+        //   onTap: () {}
+        // ),
       ]
     );
   }
