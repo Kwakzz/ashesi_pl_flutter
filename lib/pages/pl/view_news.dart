@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 
 class ViewNews extends StatefulWidget {
   const ViewNews({
-    Key? key,
+    super.key,
     required this.news,
-  }) : super(key: key);
+  });
 
   final Map<String, dynamic> news;
 
@@ -27,7 +27,7 @@ class ViewNewsState extends State<ViewNews> {
       body: RefreshIndicator(
         onRefresh: () async {
           setState(() {
-            // getTeams();
+            
           });
         },
         child: NewsItem(news: widget.news),

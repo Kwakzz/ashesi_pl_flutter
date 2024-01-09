@@ -1359,6 +1359,8 @@ class FeatureNewsItem extends StatelessWidget{
 
 }
 
+
+/// This displays a news item in the News page. It contains the news title, image, and tag.
 class NewsListTile extends StatelessWidget{
 
   const NewsListTile(
@@ -1443,7 +1445,7 @@ class NewsListTile extends StatelessWidget{
 
 }
 
-
+/// This displays the entire news item in the ViewNews page. It contains the news title, image, tag, content, date published and author.
 class NewsItem extends StatelessWidget {
 
   const NewsItem(
