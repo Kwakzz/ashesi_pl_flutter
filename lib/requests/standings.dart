@@ -41,9 +41,22 @@ Future<List<Map<String,dynamic>>> getSeasonMensFACupCompStandings (int seasonId)
 
 Future<dynamic> getMensLatestStandings () async{
 
-  return fetchListWithoutQueryParams(
-      '${_path}mens/latest/get/',
-    );
+  List<Map<String,dynamic>> faCupStandings = await fetchListWithoutQueryParams(
+    '${_path}mens/latest/get/',
+  );
+
+  Map<String, dynamic> leagueStandings = await fetchMap(
+    '${_path}mens/latest/get/',
+    {}
+  );
+
+  if (faCupStandings.isNotEmpty) {
+    return faCupStandings;
+  }
+
+  else {
+    return leagueStandings;
+  }
 }
 
 

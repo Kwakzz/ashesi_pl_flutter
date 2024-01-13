@@ -107,19 +107,20 @@ class EntryState extends State<Entry> {
       home: Scaffold(
         body: widgetOptions.elementAt(_currentIndex),
         bottomNavigationBar: BottomNavigationBar(
+          
           currentIndex: _currentIndex,
           onTap: onTabTapped,
           items: bottomNavBarItems,
           selectedLabelStyle: GoogleFonts.poppins(
-            fontSize: 12,
-            fontWeight: FontWeight.w500,
+            fontSize: 11,
+            fontWeight: FontWeight.w400,
           ),
           unselectedLabelStyle: GoogleFonts.poppins(
-            fontSize: 12,
-            fontWeight: FontWeight.w500,
+            fontSize: 9,
+            fontWeight: FontWeight.w400,
           ),
           selectedIconTheme: const IconThemeData(
-            size: 30,
+            size: 22,
           ),
   
         ),

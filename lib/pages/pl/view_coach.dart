@@ -56,6 +56,12 @@ class ViewCoachState extends State<ViewCoach> {
                 team: widget.coach['team'],
               ),
 
+              PlayerDetailsTile(
+                playerDetail: widget.coach['gender'],
+                title: "Gender", 
+                team: widget.coach['team'],
+              ),  
+
               
               const SizedBox(height: 20),
 

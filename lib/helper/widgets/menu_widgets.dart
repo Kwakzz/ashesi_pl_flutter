@@ -12,7 +12,6 @@ import 'package:ashesi_premier_league/pages/pl/view_team.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'special_button.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 
@@ -38,7 +37,7 @@ class MenuListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(right:10, left:10, top:2.5, bottom:2.5),
+      padding: const EdgeInsets.only(right:10, left:10, top:0.5, bottom:0.5),
       margin: const EdgeInsets.only(bottom: 5, left: 10, right: 10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
@@ -49,7 +48,7 @@ class MenuListTile extends StatelessWidget {
         title: Text(
           title,
           style: GoogleFonts.poppins(
-            fontSize: 12,
+            fontSize: 11,
             color: Colors.white,
             fontWeight: FontWeight.w400,
           ),
@@ -61,7 +60,7 @@ class MenuListTile extends StatelessWidget {
         trailing: const Icon(
           Icons.arrow_forward_ios,
           color: Colors.white,
-          size: 9,
+          size: 8,
         ),
         onTap: onTap,
       )
@@ -791,7 +790,7 @@ class MenuRectangle extends StatelessWidget {
       onTap: onTap,
       child: Center(
         child: Container(
-          height: 130,
+          height: 110,
           margin: const EdgeInsets.all(10),
           padding: const EdgeInsets.only(left:30, right:30),
           decoration: const BoxDecoration(
@@ -808,7 +807,7 @@ class MenuRectangle extends StatelessWidget {
                   title,
                   style: GoogleFonts.poppins(
                     color: Colors.white,
-                    fontSize: 25,
+                    fontSize: 20,
                     fontWeight: FontWeight.w900
                   )
                 ),
@@ -819,8 +818,8 @@ class MenuRectangle extends StatelessWidget {
                   margin: const EdgeInsets.only(top: 20),
                   child: Image.network(
                     playerImageLink,
-                    width: 140,
-                    height: 140,
+                    width: 120,
+                    height: 120,
                     errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
                       return const Icon(Icons.error, color: Colors.white,);
                     }
@@ -1257,7 +1256,7 @@ class JoinTheAPLRectangle extends StatelessWidget {
                 "best university football league in Ghana\nGet the latest updates on the",
                 style: GoogleFonts.poppins(
                   color: Colors.white,
-                  fontSize: 15,
+                  fontSize: 12,
                   height: -1.0,
                   fontWeight: FontWeight.w600
                 ),
@@ -1266,7 +1265,7 @@ class JoinTheAPLRectangle extends StatelessWidget {
 
               const SizedBox(height: 50,),
 
-              JoinUsButton(onPressed: (){}),
+              // JoinUsButton(onPressed: (){}),
             ]
           ),
         )
@@ -1307,7 +1306,7 @@ class FeatureNewsItem extends StatelessWidget{
         );
       },
       child: Container(
-        height: 300,
+        height: 320,
         margin: const EdgeInsets.only(bottom: 10),
         decoration: BoxDecoration(
           color: backgroundColor,
@@ -1343,8 +1342,8 @@ class FeatureNewsItem extends StatelessWidget{
                     news['tag']['name'],
                     style: GoogleFonts.poppins(
                       color: tagColor,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w500
+                      fontSize: 11,
+                      fontWeight: FontWeight.w400
                     ),
                   ),
                 ],
@@ -1385,7 +1384,7 @@ class NewsListTile extends StatelessWidget{
           );
         },
         child: Container(
-          height: 110,
+          height: 100,
           margin: const EdgeInsets.only(bottom: 10),
           decoration: const BoxDecoration(
             color: Colors.white
@@ -1395,7 +1394,7 @@ class NewsListTile extends StatelessWidget{
               Image.network(
                 news['featured_image'],
                 width: 100,
-                height:110,
+                height:100,
                 fit: BoxFit.cover,
                 errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
                   return const Icon(Icons.error, color: Colors.white,);
@@ -1464,6 +1463,9 @@ class NewsItem extends StatelessWidget {
         Image.network(
           news['featured_image'],
           fit: BoxFit.cover,
+          errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
+            return const Icon(Icons.error, color: Colors.white,);
+          }
         ),
         const SizedBox(height: 20),
         Padding(
@@ -2055,8 +2057,8 @@ class StandingsTable extends StatelessWidget {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: DataTable(
-        columnSpacing: MediaQuery.of(context).size.width*0.05,
-        dividerThickness: 0.3,
+        columnSpacing: MediaQuery.of(context).size.width*0.04,
+        dividerThickness: 0.4,
         columns: const <DataColumn>[
 
           // pos
@@ -2321,7 +2323,7 @@ class SlidingNewsState extends State<SlidingNews> {
     return Column(
       children: [
         SizedBox(
-          height: 300, 
+          height: 330, 
           child: PageView.builder(
             controller: _pageController,
             itemCount: (widget.news.length > 3) ? 3 : widget.news.length,
@@ -2545,30 +2547,21 @@ class HomePageButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        border: Border.all(
-          color: Colors.black.withOpacity(0.1),
-          width: 1.0,
-        )
+    return TextButton(
+      onPressed: () {
+        Navigator.push(
+          context, 
+          MaterialPageRoute(
+            builder: (context) => navigationPage
+          )
+        );
+      },
+      child: HeaderText(
+        text: text,
+        color: const Color.fromARGB(255, 197, 50, 50),
+        fontSize: 11,
+        fontWeight: FontWeight.w600,
       ),
-      child: TextButton(
-        onPressed: () {
-          Navigator.push(
-            context, 
-            MaterialPageRoute(
-              builder: (context) => navigationPage
-            )
-          );
-        },
-        child: HeaderText(
-          text: text,
-          color: const Color.fromARGB(255, 197, 50, 50),
-          fontSize: 12,
-          fontWeight: FontWeight.w500,
-        ),
-      )
     );
           
   }
@@ -2653,7 +2646,7 @@ class MatchEventCard extends StatelessWidget {
               child: Container(
                 margin: const EdgeInsets.only(top: 20),
                 child: Image.network(
-                  "https://www.footyrenders.com/render/jude-bellingham-1.png",
+                  event['player']['image'] ?? "https://www.footyrenders.com/render/cole-palmer-5.png",
                   width: 140,
                   height: 140,
                   errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {

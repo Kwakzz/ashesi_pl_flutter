@@ -35,30 +35,30 @@ class MoreState extends State<More> {
     return Scaffold(
     
       body: ListView(
-        children: [
+        children: const [
 
-          const JoinTheAPLRectangle(),
+          JoinTheAPLRectangle(),
 
-          const SizedBox(height: 20),
+          SizedBox(height: 20),
 
-          MoreListTile(
-            title: "Our Privacy Policy", 
-            onTap: () {}
-          ),
-
-
-          MoreListTile(
-            title: "Notifications", 
-            onTap: () {}
-          ),
-
-          MoreListTile(
-            title: "Contact us", 
-            onTap: () {}
-          ),
+          // MoreListTile(
+          //   title: "Our Privacy Policy", 
+          //   onTap: () {}
+          // ),
 
 
-          const SocialMediaIconsRow()
+          // MoreListTile(
+          //   title: "Notifications", 
+          //   onTap: () {}
+          // ),
+
+          // MoreListTile(
+          //   title: "Contact us", 
+          //   onTap: () {}
+          // ),
+
+
+          SocialMediaIconsRow()
 
         ]
 

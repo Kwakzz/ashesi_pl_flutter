@@ -29,10 +29,17 @@ class ResultDetailsState extends State<ResultDetails> {
     super.initState();
     widgetOptions = [
       MatchEvents(result: widget.result),
-      Container(),
+      Center(
+        child: Text(
+          "Lineup not announced",
+          style: GoogleFonts.poppins(
+            fontSize: 12,
+            fontWeight: FontWeight.w400,
+          ),
+        ),
+      ),
     ];
   }
-
 
 
   void onTabTapped(int index) {
@@ -89,15 +96,15 @@ class ResultDetailsState extends State<ResultDetails> {
           onTap: onTabTapped,
           items: bottomNavBarItems,
           selectedLabelStyle: GoogleFonts.poppins(
-            fontSize: 12,
-            fontWeight: FontWeight.w500,
+            fontSize: 11,
+            fontWeight: FontWeight.w400,
           ),
           unselectedLabelStyle: GoogleFonts.poppins(
-            fontSize: 12,
-            fontWeight: FontWeight.w500,
+            fontSize: 9,
+            fontWeight: FontWeight.w400,
           ),
           selectedIconTheme: const IconThemeData(
-            size: 30,
+            size: 22,
           ),
           selectedItemColor: Colors.white,
           unselectedItemColor: const Color.fromARGB(255, 217, 189, 189),

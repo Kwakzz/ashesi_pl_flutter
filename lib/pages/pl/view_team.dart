@@ -191,15 +191,15 @@ class TeamSquadState extends State<TeamSquad> {
           onTap: onTabTapped,
           items: bottomNavBarItems,
           selectedLabelStyle: GoogleFonts.poppins(
-            fontSize: 12,
+            fontSize: 11,
             fontWeight: FontWeight.w500,
           ),
           unselectedLabelStyle: GoogleFonts.poppins(
-            fontSize: 12,
+            fontSize: 9,
             fontWeight: FontWeight.w500,
           ),
           selectedIconTheme: const IconThemeData(
-            size: 30,
+            size: 22,
           ),
           selectedItemColor: Colors.white,
           unselectedItemColor: Colors.grey,
@@ -404,6 +404,7 @@ class TeamStatsState extends State<TeamStats> {
                   });
                 },
                 errorText: "team stats",
+                errorTextColor: Colors.white,
               )
             ),
 

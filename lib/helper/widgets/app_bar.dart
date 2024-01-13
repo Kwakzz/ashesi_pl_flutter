@@ -112,7 +112,7 @@ class APLAppBar extends StatelessWidget implements PreferredSizeWidget {
                 'Ashesi Premier League',
                 style: GoogleFonts.poppins(
                   color: Colors.white,
-                  fontSize: 20,
+                  fontSize: 16,
                   fontWeight: FontWeight.w900,
                 ),
               ),

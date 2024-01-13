@@ -116,7 +116,7 @@ class LatestState extends State<Latest> {
 
                     const HomepageHeading(heading: "Standings"),
 
-                    const SizedBox(height: 5.0,),
+                    const SizedBox(height: 7.5,),
 
                     if (data is Map)
                       HeaderText(

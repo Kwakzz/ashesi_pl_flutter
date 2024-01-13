@@ -89,7 +89,7 @@ class MoreState extends State<Pl> {
           }
         ),
 
-        const SizedBox(height: 20),
+        const SizedBox(height: 10),
 
         MenuListTile(
           title: "Players", 
@@ -130,7 +130,7 @@ class MoreState extends State<Pl> {
           }
         ),
 
-        const SizedBox(height: 20,),
+        const SizedBox(height: 10,),
 
         MenuListTile(
           title: "News", 
