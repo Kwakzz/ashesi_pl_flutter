@@ -1,7 +1,8 @@
-import 'package:ashesi_premier_league/helper/widgets/app_bar.dart';
-import 'package:ashesi_premier_league/helper/widgets/future_builder.dart';
-import 'package:ashesi_premier_league/helper/widgets/menu_widgets.dart';
-import 'package:ashesi_premier_league/requests/match_event.dart';
+import 'package:ashesi_premier_league/widgets/app_bar.dart';
+import 'package:ashesi_premier_league/widgets/card.dart';
+import 'package:ashesi_premier_league/widgets/future_builder.dart';
+import 'package:ashesi_premier_league/widgets/list_view.dart';
+import 'package:ashesi_premier_league/controller/match_event.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -79,13 +80,13 @@ class ResultDetailsState extends State<ResultDetails> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        appBar: RegularAppBar(
+        appBar: AppBarWithPrevButton(
           title: "Match Details",
           prevContext: context
         ),
         body: ListView(
           children:[
-            MatchDetailsRectangle(
+            MatchDetailsCard(
               result: widget.result
             ),
             widgetOptions.elementAt(_currentIndex),

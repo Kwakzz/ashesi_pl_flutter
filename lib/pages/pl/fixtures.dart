@@ -1,9 +1,9 @@
-import 'package:ashesi_premier_league/helper/functions/date_time.dart';
-import 'package:ashesi_premier_league/helper/widgets/app_bar.dart';
-import 'package:ashesi_premier_league/helper/widgets/future_builder.dart';
-import 'package:ashesi_premier_league/helper/widgets/menu_widgets.dart';
-import 'package:ashesi_premier_league/helper/widgets/text.dart';
-import 'package:ashesi_premier_league/requests/season.dart';
+import 'package:ashesi_premier_league/controller/season.dart';
+import 'package:ashesi_premier_league/util/date_time.dart';
+import 'package:ashesi_premier_league/widgets/app_bar.dart';
+import 'package:ashesi_premier_league/widgets/card.dart';
+import 'package:ashesi_premier_league/widgets/future_builder.dart';
+import 'package:ashesi_premier_league/widgets/text.dart';
 import 'package:flutter/material.dart';
 
 
@@ -25,7 +25,7 @@ class FixturesState extends State<Fixtures> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        appBar: RegularAppBar(
+        appBar: AppBarWithPrevButton(
           title: 'Fixtures',
           prevContext: context,
         ),
@@ -37,16 +37,16 @@ class FixturesState extends State<Fixtures> {
           },
           child: AppFutureBuilder(
             future: _getFixtures(),
-            builder: (data) {
+            builder: (fixtures) {
               return ListView.separated(
 
-                itemCount: data.length,
+                itemCount: fixtures.length,
                 separatorBuilder: (context, index) => const SizedBox(),
                 itemBuilder: (context, index) {
-                  final fixture = data[index];
+                  final fixture = fixtures[index];
 
                   // Check if it's the first fixture or the date has changed
-                  if (index == 0 || fixture['match_day']['date'] != data[index - 1]['match_day']['date']) {
+                  if (index == 0 || fixture['match_day']['date'] != fixtures[index - 1]['match_day']['date']) {
                     // Display the date as a section header
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -63,12 +63,12 @@ class FixturesState extends State<Fixtures> {
                           ),
                         ),
 
-                        Fixture(fixture: fixture),
+                        FixtureCard(fixture: fixture),
                       ],
                     );
                   } else {
                     // Just display the fixture
-                    return Fixture(fixture: fixture);
+                    return FixtureCard(fixture: fixture);
                   }
                 },
               );

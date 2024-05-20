@@ -1,4 +1,3 @@
-import 'package:ashesi_premier_league/helper/widgets/menu_widgets.dart';
 import 'package:ashesi_premier_league/pages/pl/coaches.dart';
 import 'package:ashesi_premier_league/pages/pl/fixtures.dart';
 import 'package:ashesi_premier_league/pages/pl/news.dart';
@@ -6,6 +5,7 @@ import 'package:ashesi_premier_league/pages/pl/players.dart';
 import 'package:ashesi_premier_league/pages/pl/results.dart';
 import 'package:ashesi_premier_league/pages/pl/standings.dart';
 import 'package:ashesi_premier_league/pages/pl/teams.dart';
+import 'package:ashesi_premier_league/widgets/list_tile.dart';
 import 'package:flutter/material.dart';
 
 
@@ -50,7 +50,7 @@ class MoreState extends State<Pl> {
 
         const SizedBox(height: 20),
 
-        MenuListTile(
+        PLTabListTile(
           title: "Fixtures", 
           iconData: Icons.sports_soccer,
           onTap: () {
@@ -63,7 +63,7 @@ class MoreState extends State<Pl> {
           }
         ),
 
-        MenuListTile(
+        PLTabListTile(
           title: "Results", 
           iconData: Icons.insert_chart,
           onTap: () {
@@ -76,7 +76,7 @@ class MoreState extends State<Pl> {
           }
         ),
 
-        MenuListTile(
+        PLTabListTile(
           title: "Standings", 
           iconData: Icons.table_chart,
           onTap: () {
@@ -91,7 +91,7 @@ class MoreState extends State<Pl> {
 
         const SizedBox(height: 10),
 
-        MenuListTile(
+        PLTabListTile(
           title: "Players", 
           iconData: Icons.run_circle,
           onTap: () {
@@ -104,7 +104,7 @@ class MoreState extends State<Pl> {
           }
         ),
 
-        MenuListTile(
+        PLTabListTile(
           title: "Teams", 
           iconData: Icons.group,
           onTap: () {
@@ -117,7 +117,7 @@ class MoreState extends State<Pl> {
           }
         ),
 
-        MenuListTile(
+        PLTabListTile(
           title: "Coaches", 
           iconData: Icons.person,
           onTap: () {
@@ -132,7 +132,7 @@ class MoreState extends State<Pl> {
 
         const SizedBox(height: 10,),
 
-        MenuListTile(
+        PLTabListTile(
           title: "News", 
           iconData: Icons.newspaper,
           onTap: () {

@@ -1,5 +1,5 @@
-import 'package:ashesi_premier_league/helper/widgets/app_bar.dart';
-import 'package:ashesi_premier_league/helper/widgets/menu_widgets.dart';
+import 'package:ashesi_premier_league/widgets/app_bar.dart';
+import 'package:ashesi_premier_league/widgets/news_item.dart';
 import 'package:flutter/material.dart';
 
 class ViewNews extends StatefulWidget {
@@ -20,7 +20,7 @@ class ViewNewsState extends State<ViewNews> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-      appBar: RegularAppBar(
+      appBar: AppBarWithPrevButton(
         title: "News",
         prevContext: context
       ),

@@ -158,3 +158,32 @@ class LinkText extends StatelessWidget {
 
 }
 
+
+class HomepageHeading extends StatelessWidget {
+
+  const HomepageHeading(
+    {
+      super.key,
+      required this.heading,
+    }
+  );
+
+  final String heading;
+
+  @override
+  Widget build(BuildContext context) {
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: Padding(
+        padding: const EdgeInsets.only(left: 20.0),
+        child: HeaderText(
+          text: heading,
+          color: const Color.fromARGB(255, 197, 50, 50),
+          fontSize: 20.0,
+          fontWeight: FontWeight.w700,
+        ),
+      ),
+    );
+  }
+
+}

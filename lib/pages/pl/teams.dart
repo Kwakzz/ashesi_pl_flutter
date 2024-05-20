@@ -1,12 +1,12 @@
-import 'package:ashesi_premier_league/helper/widgets/app_bar.dart';
-import 'package:ashesi_premier_league/helper/widgets/future_builder.dart';
-import 'package:ashesi_premier_league/helper/widgets/menu_widgets.dart';
-import 'package:ashesi_premier_league/requests/teams.dart';
+import 'package:ashesi_premier_league/controller/teams.dart';
+import 'package:ashesi_premier_league/widgets/app_bar.dart';
+import 'package:ashesi_premier_league/widgets/future_builder.dart';
+import 'package:ashesi_premier_league/widgets/list_tile.dart';
 import 'package:flutter/material.dart';
 
 
 class Teams extends StatefulWidget {
-  const Teams({ Key? key }) : super(key: key);
+  const Teams({super.key});
 
   @override
   TeamsState createState() => TeamsState();
@@ -19,7 +19,7 @@ class TeamsState extends State<Teams> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        appBar: RegularAppBar(
+        appBar: AppBarWithPrevButton(
           title: 'Teams',
           prevContext: context,
         ),
@@ -31,12 +31,12 @@ class TeamsState extends State<Teams> {
           },
           child: AppFutureBuilder(
             future: getTeams(),
-            builder: (data) {
+            builder: (teams) {
               return ListView.builder(
-                itemCount: data.length,
+                itemCount: teams.length,
                 itemBuilder: (context, index) {
 
-                  final team = data[index];
+                  final team = teams[index];
 
                   return TeamListTile(team: team);
                 },

@@ -1,5 +1,5 @@
-import 'package:ashesi_premier_league/helper/widgets/app_bar.dart';
-import 'package:ashesi_premier_league/helper/widgets/menu_widgets.dart';
+import 'package:ashesi_premier_league/widgets/app_bar.dart';
+import 'package:ashesi_premier_league/widgets/list_tile.dart';
 import 'package:flutter/material.dart';
 
 
@@ -28,7 +28,7 @@ class ViewCoachState extends State<ViewCoach> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        appBar: RegularAppBar(
+        appBar: AppBarWithPrevButton(
           prevContext: context,
           title: "${widget.coach['first_name']} ${widget.coach['last_name']}",
           color: Color(int.parse('0xFF${widget.coach['team']['color']}'))

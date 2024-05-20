@@ -1,7 +1,7 @@
-import 'package:ashesi_premier_league/helper/widgets/app_bar.dart';
-import 'package:ashesi_premier_league/helper/widgets/future_builder.dart';
-import 'package:ashesi_premier_league/helper/widgets/menu_widgets.dart';
-import 'package:ashesi_premier_league/requests/coaches.dart';
+import 'package:ashesi_premier_league/controller/coaches.dart';
+import 'package:ashesi_premier_league/widgets/app_bar.dart';
+import 'package:ashesi_premier_league/widgets/future_builder.dart';
+import 'package:ashesi_premier_league/widgets/list_tile.dart';
 import 'package:flutter/material.dart';
 
 
@@ -23,7 +23,7 @@ class CoachesState extends State<Coaches> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        appBar: RegularAppBar(
+        appBar: AppBarWithPrevButton(
           title: 'Coaches',
           prevContext: context,
         ),
@@ -35,12 +35,12 @@ class CoachesState extends State<Coaches> {
           },
           child: AppFutureBuilder(
             future: getCoaches(),
-            builder: (data) {
+            builder: (coaches) {
               return ListView.builder(
-                itemCount: data.length,
+                itemCount: coaches.length,
                 itemBuilder: (context, index) {
 
-                  final coach = data[index];
+                  final coach = coaches[index];
 
                   return CoachListTile(coach: coach);
                 },

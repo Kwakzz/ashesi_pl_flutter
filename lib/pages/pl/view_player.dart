@@ -1,6 +1,7 @@
-import 'package:ashesi_premier_league/helper/widgets/app_bar.dart';
-import 'package:ashesi_premier_league/helper/widgets/menu_widgets.dart';
-import 'package:ashesi_premier_league/helper/widgets/text.dart';
+import 'package:ashesi_premier_league/widgets/app_bar.dart';
+import 'package:ashesi_premier_league/widgets/card.dart';
+import 'package:ashesi_premier_league/widgets/list_tile.dart';
+import 'package:ashesi_premier_league/widgets/text.dart';
 import 'package:flutter/material.dart';
 
 
@@ -29,7 +30,7 @@ class ViewPlayerState extends State<ViewPlayer> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        appBar: RegularAppBar(
+        appBar: AppBarWithPrevButton(
           prevContext: context,
           title: "${widget.player['first_name']} ${widget.player['last_name']}",
           color: Color(int.parse('0xFF${widget.player['team']['color']}'))
@@ -43,7 +44,7 @@ class ViewPlayerState extends State<ViewPlayer> {
           child: ListView(
             children: [
 
-              PlayerRectangle(player: widget.player),
+              PlayerCard(player: widget.player),
 
               const SizedBox(height: 20),
 

@@ -1,10 +1,10 @@
-import 'package:ashesi_premier_league/helper/widgets/app_bar.dart';
-import 'package:ashesi_premier_league/helper/widgets/form.dart';
-import 'package:ashesi_premier_league/helper/widgets/future_builder.dart';
-import 'package:ashesi_premier_league/helper/widgets/menu_widgets.dart';
-import 'package:ashesi_premier_league/helper/widgets/text.dart';
-import 'package:ashesi_premier_league/requests/season.dart';
-import 'package:ashesi_premier_league/requests/standings.dart';
+import 'package:ashesi_premier_league/widgets/app_bar.dart';
+import 'package:ashesi_premier_league/widgets/form.dart';
+import 'package:ashesi_premier_league/widgets/future_builder.dart';
+import 'package:ashesi_premier_league/widgets/rankings.dart';
+import 'package:ashesi_premier_league/widgets/text.dart';
+import 'package:ashesi_premier_league/controller/season.dart';
+import 'package:ashesi_premier_league/controller/standings.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -66,7 +66,7 @@ class StandingsEntryState extends State<StandingsEntry> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        appBar: RegularAppBar(
+        appBar: AppBarWithPrevButton(
           title: "Standings",
           prevContext: context
         ),
@@ -144,7 +144,7 @@ class MensStandingsState extends State<MensStandings> {
     List<String> seasonDropdownItems =
         _seasons.map((season) => season['name'] as String).toList();
 
-    AppDropDownButton seasonDropDown = AppDropDownButton(
+    AppDropDownFormField seasonDropDown = AppDropDownFormField(
       items: seasonDropdownItems,
       value: _selectedSeason['name'],
       onChanged: (value) {
@@ -193,10 +193,10 @@ class MensStandingsState extends State<MensStandings> {
             Expanded(
               child: AppFutureBuilder(
                 future: _getStandings(),
-                builder: (data) {
+                builder: (standings) {
 
-                  Map<String, dynamic> leagueStandings = data[0];
-                  List<Map<String, dynamic>> faCupStandings = data[1];
+                  Map<String, dynamic> leagueStandings = standings[0];
+                  List<Map<String, dynamic>> faCupStandings = standings[1];
                   
                   if (leagueStandings.isEmpty && faCupStandings.isEmpty) {
                     return Center(
@@ -312,7 +312,7 @@ class WomensStandingsState extends State<WomensStandings> {
     List<String> seasonDropdownItems =
         _seasons.map((season) => season['name'] as String).toList();
 
-    AppDropDownButton seasonDropDown = AppDropDownButton(
+    AppDropDownFormField seasonDropDown = AppDropDownFormField(
       items: seasonDropdownItems,
       value: _selectedSeason['name'],
       onChanged: (value) {

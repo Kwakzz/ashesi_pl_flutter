@@ -1,7 +1,8 @@
-import 'package:ashesi_premier_league/helper/widgets/app_bar.dart';
-import 'package:ashesi_premier_league/helper/widgets/future_builder.dart';
-import 'package:ashesi_premier_league/helper/widgets/menu_widgets.dart';
-import 'package:ashesi_premier_league/requests/news.dart';
+import 'package:ashesi_premier_league/controller/news.dart';
+import 'package:ashesi_premier_league/widgets/app_bar.dart';
+import 'package:ashesi_premier_league/widgets/future_builder.dart';
+import 'package:ashesi_premier_league/widgets/list_tile.dart';
+import 'package:ashesi_premier_league/widgets/news_item.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -29,7 +30,7 @@ class NewsState extends State<News> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        appBar: RegularAppBar(
+        appBar: AppBarWithPrevButton(
           title: 'News',
           prevContext: context,
         ),
@@ -45,10 +46,9 @@ class NewsState extends State<News> {
             children: [
               AppFutureBuilder(
                 future: getNewsItems(), 
-                builder: (data) {
-                  return FeatureNewsItem(
-                    // data is a list of news items
-                    news: data[0],
+                builder: (newsItems) {
+                  return FeaturedNewsItem(
+                    news: newsItems[0],
                   );
                 }, 
                 reloadPageFunction: () {
@@ -82,12 +82,12 @@ class NewsState extends State<News> {
               Expanded(
                 child: AppFutureBuilder(
                   future: _getNewsButFirst(), 
-                  builder: (data) {
+                  builder: (newsItems) {
                     return ListView.separated(
-                      itemCount: data.length,
+                      itemCount: newsItems.length,
                       separatorBuilder: (context, index) => const SizedBox(),
                       itemBuilder: (context, index) {
-                        final news = data[index];
+                        final news = newsItems[index];
 
                         return NewsListTile (
                           news: news,

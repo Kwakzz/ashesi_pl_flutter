@@ -1,4 +1,5 @@
-import 'package:ashesi_premier_league/helper/widgets/menu_widgets.dart';
+import 'package:ashesi_premier_league/widgets/card.dart';
+import 'package:ashesi_premier_league/widgets/social_media.dart';
 import 'package:flutter/material.dart';
 
 
@@ -37,7 +38,7 @@ class MoreState extends State<More> {
       body: ListView(
         children: const [
 
-          JoinTheAPLRectangle(),
+          JoinTheAPLCard(),
 
           SizedBox(height: 20),
 

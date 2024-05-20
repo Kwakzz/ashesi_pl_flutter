@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'form.dart';
+import 'button.dart';
 import 'text.dart';
 
 
-/// Creates a widget that builds itself based on the latest snapshot of interaction with a [Future].
 class AppFutureBuilder extends StatelessWidget {
 
-  /// Creates a widget that builds itself based on the latest snapshot of interaction with a [Future].
   const AppFutureBuilder({
     super.key,
     required this.future,
@@ -66,6 +64,7 @@ class AppFutureBuilder extends StatelessWidget {
         return Center(
           child: CircularProgressIndicator(
             color: circularProgressIndicatorColor,
+            strokeWidth: 2.5,
           ),
         );
       },

@@ -1,9 +1,9 @@
-import 'package:ashesi_premier_league/helper/widgets/menu_widgets.dart';
 import 'package:ashesi_premier_league/pages/stats/clean_sheet_rankings.dart';
 import 'package:ashesi_premier_league/pages/stats/red_card_rankings.dart';
 import 'package:ashesi_premier_league/pages/stats/top_assisters.dart';
 import 'package:ashesi_premier_league/pages/stats/top_scorers.dart';
 import 'package:ashesi_premier_league/pages/stats/yellow_card_rankings.dart';
+import 'package:ashesi_premier_league/widgets/card.dart';
 import 'package:flutter/material.dart';
 
 
@@ -42,7 +42,7 @@ class StatsState extends State<Stats> {
 
         const SizedBox(height: 20),
 
-        MenuRectangle(
+        StatsTabCard(
           playerImageLink: "https://www.footyrenders.com/render/cristiano-ronaldo-9.png",
           title: "GOALS",
           onTap: () {
@@ -55,7 +55,7 @@ class StatsState extends State<Stats> {
           }
         ),
 
-        MenuRectangle(
+        StatsTabCard(
           playerImageLink: "https://www.footyrenders.com/render/jude-bellingham-1.png",
           title: "ASSISTS",
           onTap: () {
@@ -68,7 +68,7 @@ class StatsState extends State<Stats> {
           }
         ),
 
-        MenuRectangle(
+        StatsTabCard(
           playerImageLink: "https://www.footyrenders.com/render/emiliano-martinez-7.png",
           title: "CLEAN SHEETS",
           onTap: () {
@@ -81,7 +81,7 @@ class StatsState extends State<Stats> {
           }
         ),
 
-        MenuRectangle(
+        StatsTabCard(
           playerImageLink: "https://www.footyrenders.com/render/cole-palmer-4.png",
           title: "YELLOW CARDS",
           onTap: () {
@@ -94,7 +94,7 @@ class StatsState extends State<Stats> {
           }
         ),
 
-        MenuRectangle(
+        StatsTabCard(
           playerImageLink: "https://www.footyrenders.com/render/nicolas-jackson-3.png",
           title: "RED CARDS",
           onTap: () {

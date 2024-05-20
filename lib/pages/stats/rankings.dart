@@ -1,7 +1,8 @@
-import 'package:ashesi_premier_league/helper/widgets/form.dart';
-import 'package:ashesi_premier_league/helper/widgets/future_builder.dart';
-import 'package:ashesi_premier_league/helper/widgets/menu_widgets.dart';
-import 'package:ashesi_premier_league/requests/season.dart';
+import 'package:ashesi_premier_league/controller/season.dart';
+import 'package:ashesi_premier_league/widgets/card.dart';
+import 'package:ashesi_premier_league/widgets/form.dart';
+import 'package:ashesi_premier_league/widgets/future_builder.dart';
+import 'package:ashesi_premier_league/widgets/rankings.dart';
 import 'package:flutter/material.dart';
 
 class RankingsPage extends StatefulWidget {
@@ -47,7 +48,7 @@ class RankingsPageState extends State<RankingsPage> {
     List<String> seasonDropdownItems =
         _seasons.map((season) => season['name'] as String).toList();
 
-    AppDropDownButton seasonDropDown = AppDropDownButton(
+    AppDropDownFormField seasonDropDown = AppDropDownFormField(
       items: seasonDropdownItems,
       value: _selectedSeason['name'],
       onChanged: (value) {
@@ -91,8 +92,8 @@ class RankingsPageState extends State<RankingsPage> {
                 children: [
                   AppFutureBuilder(
                     future: widget.function(_selectedSeason['id']),
-                    builder: (data) {
-                      return HighestRankedPlayer(player: data.first);
+                    builder: (playerRankings) {
+                      return HighestRankedPlayerCard(player: playerRankings.first);
                     },
                     errorText: widget.errorTextForTopPlayer.toLowerCase(),
                     reloadPageFunction: () {
@@ -182,7 +183,7 @@ class CleanSheetRankingsPageState extends State<CleanSheetRankingsPage> {
     List<String> seasonDropdownItems =
         _seasons.map((season) => season['name'] as String).toList();
 
-    AppDropDownButton seasonDropDown = AppDropDownButton(
+    AppDropDownFormField seasonDropDown = AppDropDownFormField(
       items: seasonDropdownItems,
       value: _selectedSeason['name'],
       onChanged: (value) {
@@ -227,8 +228,8 @@ class CleanSheetRankingsPageState extends State<CleanSheetRankingsPage> {
 
                   AppFutureBuilder(
                     future: widget.function(_selectedSeason['id']),
-                    builder: (data) {
-                      return HighestRankedTeam(team: data.first);
+                    builder: (cleanSheetRankings) {
+                      return HighestRankedTeamCard(team: cleanSheetRankings.first);
                     },
                     errorText: widget.errorTextForTopTeam.toLowerCase(),
                     reloadPageFunction: () {
@@ -241,8 +242,8 @@ class CleanSheetRankingsPageState extends State<CleanSheetRankingsPage> {
           
                   AppFutureBuilder(
                     future: widget.function(_selectedSeason['id']),
-                    builder: (data) {
-                      return CleanSheetRankingsTable(teams: data, stat: "Clean sheets");
+                    builder: (cleanSheetRankings) {
+                      return CleanSheetRankings(teams: cleanSheetRankings, stat: "Clean sheets");
                     },
                     errorText: widget.errorTextForTable.toLowerCase(),
                     reloadPageFunction: () {

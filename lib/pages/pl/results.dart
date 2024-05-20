@@ -1,10 +1,10 @@
-import 'package:ashesi_premier_league/helper/functions/date_time.dart';
-import 'package:ashesi_premier_league/helper/widgets/app_bar.dart';
-import 'package:ashesi_premier_league/helper/widgets/form.dart';
-import 'package:ashesi_premier_league/helper/widgets/future_builder.dart';
-import 'package:ashesi_premier_league/helper/widgets/menu_widgets.dart';
-import 'package:ashesi_premier_league/helper/widgets/text.dart';
-import 'package:ashesi_premier_league/requests/season.dart';
+import 'package:ashesi_premier_league/controller/season.dart';
+import 'package:ashesi_premier_league/util/date_time.dart';
+import 'package:ashesi_premier_league/widgets/app_bar.dart';
+import 'package:ashesi_premier_league/widgets/card.dart';
+import 'package:ashesi_premier_league/widgets/form.dart';
+import 'package:ashesi_premier_league/widgets/future_builder.dart';
+import 'package:ashesi_premier_league/widgets/text.dart';
 import 'package:flutter/material.dart';
 
 
@@ -37,7 +37,7 @@ class ResultsState extends State<Results> {
     List<String> seasonDropdownItems =
         _seasons.map((season) => season['name'] as String).toList();
 
-    AppDropDownButton seasonDropDown = AppDropDownButton(
+    AppDropDownFormField seasonDropDown = AppDropDownFormField(
       items: seasonDropdownItems,
       value: _selectedSeason['name'],
       onChanged: (value) {
@@ -51,7 +51,7 @@ class ResultsState extends State<Results> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        appBar: RegularAppBar(
+        appBar: AppBarWithPrevButton(
           title: 'Results',
           prevContext: context,
         ),
@@ -71,7 +71,7 @@ class ResultsState extends State<Results> {
             children: [
               AppFutureBuilder(
                 future: getSeasons(),
-                builder: (data) {
+                builder: (seasons) {
                   return seasonDropDown;
                 },
                 reloadPageFunction: () async {
@@ -92,8 +92,8 @@ class ResultsState extends State<Results> {
                 Expanded(
                   child: AppFutureBuilder(
                     future: getSeasonResults(_selectedSeason['id']),
-                    builder: (data) {
-                      if (data.length == 0) {
+                    builder: (results) {
+                      if (results.length == 0) {
                         return Center(
                           child: RegularText(
                             text: "No results found.",
@@ -102,14 +102,14 @@ class ResultsState extends State<Results> {
                         );
                       }
                       return ListView.builder(
-                        itemCount: data.length,
+                        itemCount: results.length,
                         itemBuilder: (context, index) {
-                          final result = data[index];
+                          final result = results[index];
 
                           // Check if it's the first result or the date has changed
                           if (index == 0 ||
                               result['match_day']['date'] !=
-                                  data[index - 1]['match_day']['date']) {
+                                  results[index - 1]['match_day']['date']) {
                             // Display the date as a section header
                             return Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -124,12 +124,12 @@ class ResultsState extends State<Results> {
                                     fontWeight: FontWeight.w700,
                                   ),
                                 ),
-                                Result(result: result)
+                                MatchResultCard(result: result)
                               ],
                             );
                           } else {
                             // Just display the result
-                            return Result(result: result);
+                            return MatchResultCard(result: result);
                           }
                         },
                       );

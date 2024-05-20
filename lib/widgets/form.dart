@@ -5,7 +5,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'text.dart';
 
 
-/// Class for creating a form field.
 class AppFormField extends StatelessWidget {
   final TextEditingController controller;
   final String hintText;
@@ -68,7 +67,6 @@ class AppFormField extends StatelessWidget {
 }
 
 
-/// Class for creating a form field for passwords.  
 class PasswordFormField extends StatefulWidget {
 
   final TextEditingController controller;
@@ -116,54 +114,14 @@ class PasswordFormFieldState extends State <PasswordFormField> {
 }
 
 
-/// Class for creating a button for submitting forms.
-class SubmitFormButton extends StatelessWidget {
-  final String text;
-  final void Function()? onPressed;
-
-  const SubmitFormButton({
-    super.key, 
-    required this.text,
-    this.onPressed,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Center (
-      child: Container(
-        margin: const EdgeInsets.only(top: 6, bottom: 6),
-        width: MediaQuery.of(context).size.width * 0.6,
-        child: ElevatedButton(
-          onPressed: onPressed,
-          style: ElevatedButton.styleFrom(
-            foregroundColor: Colors.white, backgroundColor: const Color.fromRGBO(197, 50, 50, 1),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
-          ),
-          child: Text(
-            text,
-            style: GoogleFonts.montserrat(
-              fontSize: 12,
-              color: Colors.white,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-        ),
-      )
-    );
-  }
-}
-
-
-class AppDropDownButton extends StatelessWidget {
+class AppDropDownFormField extends StatelessWidget {
 
   final String? value;
   final List<String> items;
   final void Function(String?)? onChanged;
   final String? hintText;
 
-  const AppDropDownButton({
+  const AppDropDownFormField({
     super.key, 
     this.value,
     required this.items,

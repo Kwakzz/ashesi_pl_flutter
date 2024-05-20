@@ -1,8 +1,10 @@
-import 'package:ashesi_premier_league/helper/widgets/app_bar.dart';
-import 'package:ashesi_premier_league/helper/widgets/future_builder.dart';
-import 'package:ashesi_premier_league/helper/widgets/menu_widgets.dart';
-import 'package:ashesi_premier_league/helper/widgets/text.dart';
-import 'package:ashesi_premier_league/requests/teams.dart';
+import 'package:ashesi_premier_league/widgets/app_bar.dart';
+import 'package:ashesi_premier_league/widgets/card.dart';
+import 'package:ashesi_premier_league/widgets/future_builder.dart';
+import 'package:ashesi_premier_league/widgets/list_tile.dart';
+import 'package:ashesi_premier_league/widgets/text.dart';
+import 'package:ashesi_premier_league/controller/teams.dart';
+import 'package:ashesi_premier_league/widgets/web.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -33,7 +35,7 @@ class ViewTeamState extends State<ViewTeam> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        appBar: RegularAppBar(
+        appBar: AppBarWithPrevButton(
           prevContext: context,
           title: widget.team['name'],   
           color: Color(int.parse('0xFF${widget.team['color']}'))
@@ -46,7 +48,7 @@ class ViewTeamState extends State<ViewTeam> {
           }, 
           child: ListView(
             children: [
-              TeamRectangle(team: widget.team),
+              TeamCard(team: widget.team),
 
               const SizedBox(height: 20),
 
@@ -180,7 +182,7 @@ class TeamSquadState extends State<TeamSquad> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        appBar: RegularAppBar(
+        appBar: AppBarWithPrevButton(
           title: "Squad",
           prevContext: context,
           color: Color(int.parse('0xFF${widget.team['color']}')),
@@ -243,12 +245,12 @@ class SquadState extends State<Squad> {
       }, 
       child: AppFutureBuilder(
         future: widget.getFunction,
-        builder: (data) {
+        builder: (players) {
           return ListView.builder(
-            itemCount: data.length,
+            itemCount: players.length,
             itemBuilder: (context, index) {
-              final player = data[index];
-              return PlayerListTileInSquadList(
+              final player = players[index];
+              return SquadListTile(
                 player: player
               );
             },
@@ -348,7 +350,7 @@ class TeamStatsState extends State<TeamStats> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        appBar: RegularAppBar(
+        appBar: AppBarWithPrevButton(
           title: "All-Time Stats",
           prevContext: context,
           color: Color(int.parse('0xFF${widget.team['color']}')),
@@ -363,35 +365,35 @@ class TeamStatsState extends State<TeamStats> {
               }, 
               child: AppFutureBuilder(
                 future: getTeamStats(widget.team['id']),
-                builder: (data) {
+                builder: (teamStats) {
                   return Column(
                     children: [
                       TeamStatsTile(
-                        stat: data['wins'].toString(),
+                        stat: teamStats['wins'].toString(),
                         title: "Wins",
                         team: widget.team,
                       ),
 
                       TeamStatsTile(
-                        stat: data['losses'].toString(), 
+                        stat: teamStats['losses'].toString(), 
                         title: "Losses",
                         team: widget.team,
                       ),
 
                       TeamStatsTile(
-                        stat: data['draws'].toString(),
+                        stat: teamStats['draws'].toString(),
                         title: "Draws",
                         team: widget.team,
                       ),
 
                       TeamStatsTile(
-                        stat: data['goals_scored'].toString(),
+                        stat: teamStats['goals_scored'].toString(),
                         title: "Goals Scored", 
                         team: widget.team,
                       ),
 
                       TeamStatsTile(
-                        stat: data['goals_conceded'].toString(),
+                        stat: teamStats['goals_conceded'].toString(),
                         title: "Goals Conceded", 
                         team: widget.team,
                       ),

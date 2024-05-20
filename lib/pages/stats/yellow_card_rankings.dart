@@ -1,6 +1,6 @@
-import 'package:ashesi_premier_league/helper/widgets/app_bar.dart';
 import 'package:ashesi_premier_league/pages/stats/rankings.dart';
-import 'package:ashesi_premier_league/requests/stats.dart';
+import 'package:ashesi_premier_league/controller/stats.dart';
+import 'package:ashesi_premier_league/widgets/app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -77,7 +77,7 @@ class YellowCardRankingEntryState extends State<YellowCardRankingEntry> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        appBar: RegularAppBar(
+        appBar: AppBarWithPrevButton(
           title: "Yellow Cards",
           prevContext: context
         ),

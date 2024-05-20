@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:http/http.dart' as https;
+import 'package:http/http.dart' as http;
 import 'api_uri.dart';
 
 
@@ -9,10 +9,10 @@ Future<Map<String, dynamic>> fetchMap (String path, Map<String, dynamic> queryPa
 
   try {
 
-    final uri = queryParams != {} ? Uri.https(domain, path, queryParams) : Uri.https(domain, path);
+    final uri = queryParams != {} ? Uri.http(domain, path, queryParams) : Uri.http(domain, path);
 
 
-    final response = await https.get(
+    final response = await http.get(
       uri,
       headers: <String, String>{
         'Content-Type': 'application/json',
@@ -48,7 +48,7 @@ Future<Map<String, dynamic>> fetchMap (String path, Map<String, dynamic> queryPa
 Future<List<Map<String, dynamic>>> fetchListWithQueryParams (String path, Map<String, dynamic> queryParams) async {
 
   try {
-    final response = await https.get(
+    final response = await http.get(
       Uri.https(domain, path, queryParams),
       headers: <String, String>{
         'Content-Type': 'application/json',
@@ -83,7 +83,7 @@ Future<List<Map<String, dynamic>>> fetchListWithQueryParams (String path, Map<St
 Future<List<Map<String, dynamic>>> fetchListWithoutQueryParams (String path) async {
 
   try {
-    final response = await https.get(
+    final response = await http.get(
       Uri.https(domain, path),
       headers: <String, String>{
         'Content-Type': 'application/json',

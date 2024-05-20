@@ -40,13 +40,13 @@ class MessageDialogBox extends StatelessWidget {
 }
 
 
-class ConfirmDialogBox extends StatelessWidget {
+class ConfirmationDialogBox extends StatelessWidget {
 
   final String message;
   final String title;
   final Function () onOk;
 
-  const ConfirmDialogBox(
+  const ConfirmationDialogBox(
     {
       super.key, 
       required this.message,
