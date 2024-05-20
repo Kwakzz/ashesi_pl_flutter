@@ -13,7 +13,7 @@ Welcome APL fans! This project provides a foundation for building a comprehensiv
 
 **Comprehensive documentation:** For a deeper dive into Flutter development, explore the official documentation, which offers in-depth tutorials, code samples, guidance on mobile app development best practices, and a complete API reference: https://docs.flutter.dev/
 
-## Features (to be implemented)
+## Features
 
 This app is designed to offer the following features (feel free to add more!):
 
@@ -26,5 +26,3 @@ This app is designed to offer the following features (feel free to add more!):
 ## Contributing
 
 Only authorized developers are allowed to make changes.
-
-This is an initial outline. Remember to update it as you develop the app, adding specific features implemented and functionalities planned!
